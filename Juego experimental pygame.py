@@ -334,6 +334,4 @@ while Dios:
 print("NUMEROS RANDOM GENERADOS")
 print(Up_down_direction)
 print(Right_left_direction)
-print("Loquequiera")
-print("loquequiera2.0")
 pygame.quit()
