@@ -346,7 +346,7 @@ while Dios:
     # REFRESCA LA PANTALLA
     pygame.display.flip()
 
-
+print("HOLA GENTE DE ZONA")
 pygame.quit()
 
 
