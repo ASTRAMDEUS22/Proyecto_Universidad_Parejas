@@ -21,32 +21,12 @@ Right_left_direction = random.randint(1,2)
 
 
 
-'''En caso de usar un fondo estático, usar la documentacion de abajo, caso contrario, usar la de arriba'''
-#SCREEN = pygame.display.set_mode((1366,768))
-#pygame.display.set_caption("TERMINATOR")
-
-
-#SE INSERTARÁ UN ICONO
-'''Es bueno utilizar una variable'''
-'''Se usa un display para llamar a la variable icono y así aplicar el cambio'''
-'''Entre los parentesis de "set_icon" ponemos el nombre la variable que contiene el icono'''
 
 icono = pygame.image.load("imagenes_adicionales/logo LOL.png")
 pygame.display.set_icon(icono)
 
-#SE AGREGARÁ UN FONDO ESTATICO
-'''Hay que tener la imagen en una carpeta'''
-'''Se hace igual que con el icono, se carga una imagen en una vaariable y se muestra como el icono'''
-'''Se  añade el nombre de la variable que tiene la pantalla, mas blit, luego el nombre de la variable que contiene el fondo y por ultimo los parentesis para la ubicacion'''
-'''Convert sirve para optimizar el mvimiento en el juego y "acelerarlo"'''
-#fondo = pygame.image.load("fondo experimental.png").convert()
-#SCREEN.blit(fondo,(0,0))
-'''En caso de usar un fondo estatico, usar lo de arriba, caso contrario, lo de abajo'''
-'''Se usa X y Y para poder manipularlos'''
 #FONDO ANIMADO
 fondo = pygame.image.load("Fondo_juego/fondo experimental.png").convert()
-
-'''Con esto, se translada las coords de la pantalla al bucle for, haciendo el bucle/animacion, en la identacion del for'''
 
 
 
@@ -225,7 +205,11 @@ Enemigos = pygame.sprite.Group()
 Bullets = Enemigo()
 sprites.add((Bullets))
 
+Bullets2 = Enemigo()
+sprites.add((Bullets2))
 
+Bullets3 = Enemigo()
+sprites.add((Bullets3))
 
 
 
@@ -264,7 +248,7 @@ def actualizacionPantalla():
     global cuentaPasos
     global x
 
-    
+
     #FONDO EN MOVIMIENTO
     x_bucle = x % fondo.get_rect().width
     SCREEN.blit(fondo,(x_bucle - fondo.get_rect().width,0))
@@ -332,7 +316,6 @@ while Dios:
         py += velocidad
 
 
-
 #___________________________________________ZONA DE VENTANA________________________________________________#
     #ACTUALIZACION DE LA VENTANA
     pygame.display.update()
@@ -352,15 +335,3 @@ print("NUMEROS RANDOM GENERADOS")
 print(Up_down_direction)
 print(Right_left_direction)
 pygame.quit()
-
-
-
-
-
-
-
-
-
-
-
-
