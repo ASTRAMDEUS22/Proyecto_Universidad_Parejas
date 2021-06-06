@@ -156,8 +156,8 @@ class Enemigo(pygame.sprite.Sprite):
         self.rect.x = random.randrange(Largo - self.rect.width)
         self.rect.y = random.randrange(Alto - self.rect.height)
 
-        self.acceleracion_inicialX = (3)
-        self.acceleracion_inicialY = (3)
+        self.acceleracion_inicialX = (1)
+        self.acceleracion_inicialY = (1)
 
     def update(self):
 
@@ -177,7 +177,7 @@ class Enemigo(pygame.sprite.Sprite):
                 self.acceleracion_inicialY -= 1
 
         # LIMITAR EL BORDE DERECHO
-        if self.rect.right >= Largo:
+        elif self.rect.right >= Largo:
             if Right_left_direction == 1:#CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
                 self.acceleracion_inicialX -= 1
                 self.acceleracion_inicialY += 1
@@ -187,7 +187,7 @@ class Enemigo(pygame.sprite.Sprite):
                 self.acceleracion_inicialY -= 1
 
         # LIMITAR EL BORDE INFERIOR
-        if self.rect.bottom >= Alto:#CON ESTE LA BALA SUBE HACIA LA DERECHA
+        elif self.rect.bottom >= Alto:#CON ESTE LA BALA SUBE HACIA LA DERECHA
             if Up_down_direction == 1:
                 self.acceleracion_inicialX += 1
                 self.acceleracion_inicialY -= 1
@@ -197,7 +197,7 @@ class Enemigo(pygame.sprite.Sprite):
                 self.acceleracion_inicialY -= 1
 
         # LIMITAR EL BORDE  SUPERIOR
-        if self.rect.top <= 0:
+        elif self.rect.top <= 0:
             if Right_left_direction == 1:#CON ESTE LA BALA BAJA HACIA LA DERECHA
                 self.acceleracion_inicialX += 1
                 self.acceleracion_inicialY += 1
@@ -264,6 +264,7 @@ def actualizacionPantalla():
     global cuentaPasos
     global x
 
+    
     #FONDO EN MOVIMIENTO
     x_bucle = x % fondo.get_rect().width
     SCREEN.blit(fondo,(x_bucle - fondo.get_rect().width,0))
@@ -293,6 +294,7 @@ def actualizacionPantalla():
 while Dios:
     #FPS
     RELOJ.tick(100)
+    #LOS NUMEROS RANDOM
 
     #BUCLE EN EL JUEGO
     for event in pygame.event.get():
@@ -346,7 +348,9 @@ while Dios:
     # REFRESCA LA PANTALLA
     pygame.display.flip()
 
-print("HOLA GENTE DE ZONA")
+print("NUMEROS RANDOM GENERADOS")
+print(Up_down_direction)
+print(Right_left_direction)
 pygame.quit()
 
 
