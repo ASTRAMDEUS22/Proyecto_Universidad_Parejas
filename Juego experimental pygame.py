@@ -12,9 +12,9 @@ SCREEN = pygame.display.set_mode((Largo,Alto))
 spawn_X = random.randrange(1,1200)
 spawn_Y = random.randrange(1,600)
 #DIRECCION DE LA BALA POSS CHOQUE
-Up_down_direction = random.randint(1,2)
+Up_down_direction = random.randint(1,3)
 
-Right_left_direction = random.randint(1,2)
+Right_left_direction = random.randint(1,3)
 
 
 #TITULO DE LA VENTANA
@@ -32,24 +32,12 @@ fondo = pygame.image.load("Fondo_juego/fondo experimental.png").convert()
 
 
 #Música de fondo
-pygame.mixer.music.load('musica/Arcangel two steps from hell.ogg')
+pygame.mixer.music.load('musica/Four brave Champios-theme.ogg')
 pygame.mixer.music.play(-1)
 
 #PERSONAJE
-#_______________________________________BARCO SIN CLASE____________________________________________#
-'''
-quieto = pygame.image.load('Barcos estatico.png')
 
-caminar_derecha = [pygame.image.load('Barcos piratas derecha_1.png'),
-                   pygame.image.load('Barcos piratas derecha_2.png'),
-                   pygame.image.load('Barcos piratas derecha_3.png'),
-                   pygame.image.load('Barcos piratas derecha_4.png'),]
-
-caminar_izquierda = [pygame.image.load('Barcos piratas izquierda_1.png'),
-                     pygame.image.load('Barcos piratas izquierda_2.png'),
-                     pygame.image.load('Barcos piratas izquierda_3.png'),
-                     pygame.image.load('Barcos piratas izquierda_4.png'),]'''
-#___________________________________________________BARCO CON CLASE________________________________________________#
+#___________________________________________________CLASE BARCO________________________________________________________#
 class Pirate_ship(pygame.sprite.Sprite):
     #Sprite del barco
     def __init__(self):
@@ -116,7 +104,7 @@ class Pirate_ship(pygame.sprite.Sprite):
         if self.rect.bottom > Alto:
             self.rect.bottom = Alto
 
-#_______________________________________________
+#_______________________________________________CLASE ENEMIGO__________________________________________________________#
 
 class Enemigo(pygame.sprite.Sprite):
     global spawn_X
@@ -136,8 +124,8 @@ class Enemigo(pygame.sprite.Sprite):
         self.rect.x = random.randrange(Largo - self.rect.width)
         self.rect.y = random.randrange(Alto - self.rect.height)
 
-        self.acceleracion_inicialX = 4
-        self.acceleracion_inicialY = 4
+        self.acceleracion_inicialX = random.randint(4,6)
+        self.acceleracion_inicialY = random.randint(4,6)
 
     def update(self):
 
@@ -148,45 +136,58 @@ class Enemigo(pygame.sprite.Sprite):
         # LIMITAR EL BORDE  IZQUIERDO
         if self.rect.left <= 0:
             if Right_left_direction == 1:#CON ESTE LA BALA BAJA HACIA LA DERECHA
-                self.acceleracion_inicialX = 4
-                self.acceleracion_inicialY = 4
-
+                self.acceleracion_inicialX = random.randint(4,6)
+                self.acceleracion_inicialY = random.randint(4,6)
 
             elif Right_left_direction == 2:#CON ESTE LA BALA SUBE HACIA LA DERECHA
-                self.acceleracion_inicialX = 4
-                self.acceleracion_inicialY = -4
+                self.acceleracion_inicialX = random.randint(4,6)
+                self.acceleracion_inicialY = -random.randint(4,6)
+
+            elif Right_left_direction == 3:
+                self.acceleracion_inicialX = random.randint(4,6)
+                self.acceleracion_inicialY = 0
 
         # LIMITAR EL BORDE DERECHO
         elif self.rect.right >= Largo:
             if Right_left_direction == 1:#CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
-                self.acceleracion_inicialX = -4
-                self.acceleracion_inicialY = 4
+                self.acceleracion_inicialX = -random.randint(4,6)
+                self.acceleracion_inicialY = random.randint(4,6)
 
             elif Right_left_direction == 2:#CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
-                self.acceleracion_inicialX = -4
-                self.acceleracion_inicialY = -4
+                self.acceleracion_inicialX = -random.randint(4,6)
+                self.acceleracion_inicialY = -random.randint(4,6)
+
+            elif Right_left_direction == 3:
+                self.acceleracion_inicialX = -random.randint(4,6)
+                self.acceleracion_inicialY = 0
 
         # LIMITAR EL BORDE INFERIOR
         elif self.rect.bottom >= Alto:#CON ESTE LA BALA SUBE HACIA LA DERECHA
             if Up_down_direction == 1:
-                self.acceleracion_inicialX = 4
-                self.acceleracion_inicialY = -4
+                self.acceleracion_inicialX = random.randint(4,6)
+                self.acceleracion_inicialY = -random.randint(4,6)
 
-            elif Right_left_direction == 2:#CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
-                self.acceleracion_inicialX = -4
-                self.acceleracion_inicialY = -4
+            elif Up_down_direction == 2:#CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
+                self.acceleracion_inicialX = -random.randint(4,6)
+                self.acceleracion_inicialY = -random.randint(4,6)
+
+            elif Up_down_direction == 3:
+                self.acceleracion_inicialX = 0
+                self.acceleracion_inicialY = -random.randint(4,6)
 
         # LIMITAR EL BORDE  SUPERIOR
         elif self.rect.top <= 0:
-            if Right_left_direction == 1:#CON ESTE LA BALA BAJA HACIA LA DERECHA
-                self.acceleracion_inicialX = 4
-                self.acceleracion_inicialY = 4
+            if Up_down_direction == 1:#CON ESTE LA BALA BAJA HACIA LA DERECHA
+                self.acceleracion_inicialX = random.randint(4,6)
+                self.acceleracion_inicialY = random.randint(4,6)
 
-            elif Right_left_direction == 2:#CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
-                self.acceleracion_inicialX = -4
-                self.acceleracion_inicialY = 4
+            elif Up_down_direction == 2:#CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
+                self.acceleracion_inicialX = -random.randint(4,6)
+                self.acceleracion_inicialY = random.randint(4,6)
 
-
+            elif Up_down_direction == 3:
+                self.acceleracion_inicialX = 0
+                self.acceleracion_inicialY = random.randint(4,6)
 
 #_____________________________________________CREACION DE LA VENTANA_____________________________________________________#
 pygame.init()
@@ -210,26 +211,25 @@ sprites.add((Bullets2))
 
 Bullets3 = Enemigo()
 sprites.add((Bullets3))
-
+'''
 Bullets4 = Enemigo()
-sprites.add((Bullets4))
-
+sprites.add((Bullets4))'''
+'''
 Bullets5 = Enemigo()
-sprites.add((Bullets5))
-
+sprites.add((Bullets5'''
+'''
 Bullets6 = Enemigo()
-sprites.add((Bullets6))
-
+sprites.add((Bullets6))'''
+'''
 Bullets7 = Enemigo()
-sprites.add((Bullets7))
+sprites.add((Bullets7))'''
 #SPRITE JUGADOR
 
 Jugador = Pirate_ship()
 sprites.add((Jugador))
 #____________________________________________________________________________________________________________________
 
-Dios = True
-#BUCLE PARA LA VENTANA
+
 
 
 #VARIABLES PARA EL MOVIMIENTO
@@ -283,7 +283,9 @@ def actualizacionPantalla():
         SCREEN.blit(quieto,(int(px), int(py)))'''
 
 
-
+#BUCLE PARA LA VENTANA
+Dios = True
+Aleatorio = True
 while Dios:
     #FPS
     RELOJ.tick(100)
@@ -324,6 +326,13 @@ while Dios:
     if keys[pygame.K_DOWN] and py < 610:
         py += velocidad
 
+    Up_down_direction = random.randint(1, 3)
+    Right_left_direction = random.randint(1, 3)
+    print(Up_down_direction)
+    print(Right_left_direction)
+
+
+
 
 #___________________________________________ZONA DE VENTANA________________________________________________#
     #ACTUALIZACION DE LA VENTANA
@@ -341,6 +350,5 @@ while Dios:
     pygame.display.flip()
 
 print("NUMEROS RANDOM GENERADOS")
-print(Up_down_direction)
-print(Right_left_direction)
+
 pygame.quit()
