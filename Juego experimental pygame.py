@@ -136,8 +136,8 @@ class Enemigo(pygame.sprite.Sprite):
         self.rect.x = random.randrange(Largo - self.rect.width)
         self.rect.y = random.randrange(Alto - self.rect.height)
 
-        self.acceleracion_inicialX = (1)
-        self.acceleracion_inicialY = (1)
+        self.acceleracion_inicialX = 4
+        self.acceleracion_inicialY = 4
 
     def update(self):
 
@@ -148,43 +148,43 @@ class Enemigo(pygame.sprite.Sprite):
         # LIMITAR EL BORDE  IZQUIERDO
         if self.rect.left <= 0:
             if Right_left_direction == 1:#CON ESTE LA BALA BAJA HACIA LA DERECHA
-                self.acceleracion_inicialX += 1
-                self.acceleracion_inicialY += 1
+                self.acceleracion_inicialX = 4
+                self.acceleracion_inicialY = 4
 
 
             elif Right_left_direction == 2:#CON ESTE LA BALA SUBE HACIA LA DERECHA
-                self.acceleracion_inicialX += 1
-                self.acceleracion_inicialY -= 1
+                self.acceleracion_inicialX = 4
+                self.acceleracion_inicialY = -4
 
         # LIMITAR EL BORDE DERECHO
         elif self.rect.right >= Largo:
             if Right_left_direction == 1:#CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
-                self.acceleracion_inicialX -= 1
-                self.acceleracion_inicialY += 1
+                self.acceleracion_inicialX = -4
+                self.acceleracion_inicialY = 4
 
             elif Right_left_direction == 2:#CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
-                self.acceleracion_inicialX -= 1
-                self.acceleracion_inicialY -= 1
+                self.acceleracion_inicialX = -4
+                self.acceleracion_inicialY = -4
 
         # LIMITAR EL BORDE INFERIOR
         elif self.rect.bottom >= Alto:#CON ESTE LA BALA SUBE HACIA LA DERECHA
             if Up_down_direction == 1:
-                self.acceleracion_inicialX += 1
-                self.acceleracion_inicialY -= 1
+                self.acceleracion_inicialX = 4
+                self.acceleracion_inicialY = -4
 
             elif Right_left_direction == 2:#CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
-                self.acceleracion_inicialX -= 1
-                self.acceleracion_inicialY -= 1
+                self.acceleracion_inicialX = -4
+                self.acceleracion_inicialY = -4
 
         # LIMITAR EL BORDE  SUPERIOR
         elif self.rect.top <= 0:
             if Right_left_direction == 1:#CON ESTE LA BALA BAJA HACIA LA DERECHA
-                self.acceleracion_inicialX += 1
-                self.acceleracion_inicialY += 1
+                self.acceleracion_inicialX = 4
+                self.acceleracion_inicialY = 4
 
             elif Right_left_direction == 2:#CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
-                self.acceleracion_inicialX -= 1
-                self.acceleracion_inicialY += 1
+                self.acceleracion_inicialX = -4
+                self.acceleracion_inicialY = 4
 
 
 
@@ -211,8 +211,17 @@ sprites.add((Bullets2))
 Bullets3 = Enemigo()
 sprites.add((Bullets3))
 
+Bullets4 = Enemigo()
+sprites.add((Bullets4))
 
+Bullets5 = Enemigo()
+sprites.add((Bullets5))
 
+Bullets6 = Enemigo()
+sprites.add((Bullets6))
+
+Bullets7 = Enemigo()
+sprites.add((Bullets7))
 #SPRITE JUGADOR
 
 Jugador = Pirate_ship()
