@@ -1,3 +1,16 @@
+'''
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#                         Creadores:                            #
+#                                                               #
+#                     Josthin Soto Sánchez                      #
+#                     Axel Flores Lara                          #
+#                                                               #
+#                                                               #
+#                                                               #
+#                                                               #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+'''
+
 import pygame
 import random
 
@@ -121,9 +134,9 @@ class Enemigo(pygame.sprite.Sprite):
         # Se obtiene el rectangulo
         self.rect = self.image.get_rect()
         # ACOMODAR EL RECTANGULO/CENTRO
-        self.rect.center = (100, 300)
-        self.rect.x = random.randrange(Largo - self.rect.width)
-        self.rect.y = random.randrange(Alto - self.rect.height)
+        self.rect.center = (Largo // 4, Alto // 4)
+        self.rect.x = random.randrange(1,100)
+        self.rect.y = random.randrange(1,Alto)
 
         self.acceleracion_inicialX = 1
         self.acceleracion_inicialY = 1
