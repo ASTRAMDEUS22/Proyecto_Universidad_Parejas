@@ -5,12 +5,12 @@
 #                     Josthin Soto Sánchez                      #
 #                     Axel Flores Lara                          #
 #                                                               #
-#                                                               #
+#                          Grupo 4                              #
 #                                                               #
 #                                                               #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 '''
-
+#BIBLIOTECAS A USAR
 import pygame
 import random
 
@@ -19,15 +19,12 @@ pygame.init()
 
 #PANTALLA
 Largo , Alto = 1366,768
+
+
 SCREEN = pygame.display.set_mode((Largo,Alto))
 
-#LUGAR DE APARICION DE LAS NAVES
-spawn_X = random.randrange(1,180)
-spawn_Y = random.randrange(1,600)
-#DIRECCION DE LA BALA POSS CHOQUE
-Up_down_direction = random.randint(1,3)
 
-Right_left_direction = random.randint(1,3)
+
 
 Direccion_aleatoria_X = random.randrange(1,10)
 Direccion_aleatoria_Y = random.randrange(1,10)
@@ -43,7 +40,8 @@ pygame.display.set_icon(icono)
 fondo = pygame.image.load("Fondo_juego/fondo experimental.png").convert()
 
 
-
+#COLORES
+BLANCO=(255,255,255)
 
 #Música de fondo
 pygame.mixer.music.load('musica/Four brave Champios-theme.ogg')
@@ -84,19 +82,19 @@ class Pirate_ship(pygame.sprite.Sprite):
 
         #MOVIMIENTO HACIA LA IZQUIERDA
         if teclas [pygame.K_a]:
-            self.acceleracion_inicialX = -10
+            self.acceleracion_inicialX = -15
 
         # MOVIMIENTO HACIA LA DERECHA
         if teclas[pygame.K_d]:
-            self.acceleracion_inicialX = 10
+            self.acceleracion_inicialX = 15
 
         # MOVIMIENTO HACIA LA ARRIBA
         if teclas[pygame.K_w]:
-            self.acceleracion_inicialY = -10
+            self.acceleracion_inicialY = -15
 
         # MOVIMIENTO HACIA LA ABAJO
         if teclas[pygame.K_s]:
-            self.acceleracion_inicialY = 10
+            self.acceleracion_inicialY = 15
 
         #ACTUALIZA LA VELOCIDAD DEL PJ
         self.rect.x += self.acceleracion_inicialX
@@ -115,8 +113,8 @@ class Pirate_ship(pygame.sprite.Sprite):
             self.rect.top = 0
 
         # LIMITAR EL BORDE INFERIOR
-        if self.rect.bottom > Alto:
-            self.rect.bottom = Alto
+        if self.rect.bottom > 650:
+            self.rect.bottom = 650
 
 #_______________________________________________CLASE ENEMIGO__________________________________________________________#
 
@@ -128,7 +126,7 @@ class Enemigo(pygame.sprite.Sprite):
         # Se hereda el init de la clase Sprite de pygame
         super().__init__()
         # La bala/rectangulo
-        self.image = pygame.image.load("imagenes_adicionales/bomba.png").convert()
+        self.image = pygame.image.load("imagenes_adicionales/bomba_class1.png").convert()
         self.image.set_colorkey("black")
 
         # Se obtiene el rectangulo
@@ -172,7 +170,154 @@ class Enemigo(pygame.sprite.Sprite):
 
 
         # LIMITAR EL BORDE INFERIOR
-        elif self.rect.bottom >= Alto:#CON ESTE LA BALA SUBE HACIA LA DERECHA
+        elif self.rect.bottom >= 650:#CON ESTE LA BALA SUBE HACIA LA DERECHA
+            if Up_down_direction == 1:
+                self.acceleracion_inicialX = Direccion_aleatoria_X
+                self.acceleracion_inicialY = -Direccion_aleatoria_Y
+
+            elif Up_down_direction == 2:#CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
+                self.acceleracion_inicialX = -Direccion_aleatoria_X
+                self.acceleracion_inicialY = -Direccion_aleatoria_Y
+
+
+
+        # LIMITAR EL BORDE  SUPERIOR
+        elif self.rect.top <= 0:
+            if Up_down_direction == 1:#CON ESTE LA BALA BAJA HACIA LA DERECHA
+                self.acceleracion_inicialX = Direccion_aleatoria_X
+                self.acceleracion_inicialY = Direccion_aleatoria_Y
+
+            elif Up_down_direction == 2:#CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
+                self.acceleracion_inicialX = -Direccion_aleatoria_X
+                self.acceleracion_inicialY = Direccion_aleatoria_Y
+
+
+class Enemigo2(pygame.sprite.Sprite):
+    global spawn_X
+    global spawn_Y
+    # Sprite del barco
+    def __init__(self):
+        # Se hereda el init de la clase Sprite de pygame
+        super().__init__()
+        # La bala/rectangulo
+        self.image = pygame.image.load("imagenes_adicionales/bomba_class2.png").convert()
+        self.image.set_colorkey("black")
+
+        # Se obtiene el rectangulo
+        self.rect = self.image.get_rect()
+        # ACOMODAR EL RECTANGULO/CENTRO
+        self.rect.center = (Largo // 4, Alto // 4)
+        self.rect.x = random.randrange(1,100)
+        self.rect.y = random.randrange(1,Alto)
+
+        self.acceleracion_inicialX = 1
+        self.acceleracion_inicialY = 1
+
+    def update(self):
+
+        # ACTUALIZA LA VELOCIDAD DEL PJ
+        self.rect.x += self.acceleracion_inicialX
+        self.rect.y += self.acceleracion_inicialY
+
+        # LIMITAR EL BORDE  IZQUIERDO
+        if self.rect.left <= 0:
+            if Right_left_direction == 1:#CON ESTE LA BALA BAJA HACIA LA DERECHA
+                self.acceleracion_inicialX = Direccion_aleatoria_X
+                self.acceleracion_inicialY = Direccion_aleatoria_Y
+
+            elif Right_left_direction == 2:#CON ESTE LA BALA SUBE HACIA LA DERECHA
+                self.acceleracion_inicialX = Direccion_aleatoria_X
+                self.acceleracion_inicialY = -Direccion_aleatoria_Y
+
+
+
+        # LIMITAR EL BORDE DERECHO
+        elif self.rect.right >= Largo:
+            if Right_left_direction == 1:#CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
+                self.acceleracion_inicialX = -Direccion_aleatoria_X
+                self.acceleracion_inicialY = Direccion_aleatoria_Y
+
+            elif Right_left_direction == 2:#CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
+                self.acceleracion_inicialX = -Direccion_aleatoria_X
+                self.acceleracion_inicialY = -Direccion_aleatoria_Y
+
+
+
+        # LIMITAR EL BORDE INFERIOR
+        elif self.rect.bottom >= 650:#CON ESTE LA BALA SUBE HACIA LA DERECHA
+            if Up_down_direction == 1:
+                self.acceleracion_inicialX = Direccion_aleatoria_X
+                self.acceleracion_inicialY = -Direccion_aleatoria_Y
+
+            elif Up_down_direction == 2:#CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
+                self.acceleracion_inicialX = -Direccion_aleatoria_X
+                self.acceleracion_inicialY = -Direccion_aleatoria_Y
+
+
+
+        # LIMITAR EL BORDE  SUPERIOR
+        elif self.rect.top <= 0:
+            if Up_down_direction == 1:#CON ESTE LA BALA BAJA HACIA LA DERECHA
+                self.acceleracion_inicialX = Direccion_aleatoria_X
+                self.acceleracion_inicialY = Direccion_aleatoria_Y
+
+            elif Up_down_direction == 2:#CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
+                self.acceleracion_inicialX = -Direccion_aleatoria_X
+                self.acceleracion_inicialY = Direccion_aleatoria_Y
+
+class Enemigo3(pygame.sprite.Sprite):
+    global spawn_X
+    global spawn_Y
+    # Sprite del barco
+    def __init__(self):
+        # Se hereda el init de la clase Sprite de pygame
+        super().__init__()
+        # La bala/rectangulo
+        self.image = pygame.image.load("imagenes_adicionales/bomba_class3.png").convert()
+        self.image.set_colorkey("black")
+
+        # Se obtiene el rectangulo
+        self.rect = self.image.get_rect()
+        # ACOMODAR EL RECTANGULO/CENTRO
+        self.rect.center = (Largo // 4, Alto // 4)
+        self.rect.x = random.randrange(1,100)
+        self.rect.y = random.randrange(1,Alto)
+
+        self.acceleracion_inicialX = 1
+        self.acceleracion_inicialY = 1
+
+    def update(self):
+
+        # ACTUALIZA LA VELOCIDAD DEL PJ
+        self.rect.x += self.acceleracion_inicialX
+        self.rect.y += self.acceleracion_inicialY
+
+        # LIMITAR EL BORDE  IZQUIERDO
+        if self.rect.left <= 0:
+            if Right_left_direction == 1:#CON ESTE LA BALA BAJA HACIA LA DERECHA
+                self.acceleracion_inicialX = Direccion_aleatoria_X
+                self.acceleracion_inicialY = Direccion_aleatoria_Y
+
+            elif Right_left_direction == 2:#CON ESTE LA BALA SUBE HACIA LA DERECHA
+                self.acceleracion_inicialX = Direccion_aleatoria_X
+                self.acceleracion_inicialY = -Direccion_aleatoria_Y
+
+
+
+        # LIMITAR EL BORDE DERECHO
+        elif self.rect.right >= Largo:
+            if Right_left_direction == 1:#CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
+                self.acceleracion_inicialX = -Direccion_aleatoria_X
+                self.acceleracion_inicialY = Direccion_aleatoria_Y
+
+            elif Right_left_direction == 2:#CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
+                self.acceleracion_inicialX = -Direccion_aleatoria_X
+                self.acceleracion_inicialY = -Direccion_aleatoria_Y
+
+
+
+        # LIMITAR EL BORDE INFERIOR
+        elif self.rect.bottom >= 650:#CON ESTE LA BALA SUBE HACIA LA DERECHA
             if Up_down_direction == 1:
                 self.acceleracion_inicialX = Direccion_aleatoria_X
                 self.acceleracion_inicialY = -Direccion_aleatoria_Y
@@ -195,6 +340,8 @@ class Enemigo(pygame.sprite.Sprite):
 
 
 
+
+
 #_____________________________________________CREACION DE LA VENTANA_____________________________________________________#
 pygame.init()
 pantalla = pygame.display.set_mode(((Largo,Alto)))
@@ -205,32 +352,20 @@ clock = pygame.time.Clock()
 #_______________________________________________SPRITES______________________________________________________________
 
 sprites = pygame.sprite.Group()
-Enemigoss =pygame.sprite.Group()
-
-
+Enemigo_1 = pygame.sprite.Group()
+Enemigo_2 = pygame.sprite.Group()
+Enemigo_3 = pygame.sprite.Group()
 
 
 #SPRITE ENEMIGOS
 Bullets = Enemigo()
-Enemigoss.add((Bullets))
+Enemigo_1.add((Bullets))
 
-Bullets2 = Enemigo()
-Enemigoss.add((Bullets2))
+Bullets2 = Enemigo2()
+Enemigo_2.add((Bullets2))
 
-Bullets3 = Enemigo()
-Enemigoss.add((Bullets3))
-'''
-Bullets4 = Enemigo()
-Enemigoss.add((Bullets4))
-
-Bullets5 = Enemigo()
-sprites.add((Bullets5))
-
-Bullets6 = Enemigo()
-sprites.add((Bullets6))
-
-Bullets7 = Enemigo()
-sprites.add((Bullets7))'''
+Bullets3 = Enemigo3()
+Enemigo_3.add((Bullets3))
 #SPRITE JUGADOR
 
 Jugador = Pirate_ship()
@@ -258,12 +393,15 @@ izquierda = False
 derecha = False
 
 #AVANCE
-cuentaPasos = 0
+#cuentaPasos = 0
 
 #MOVIMIENTO
+
+
 def actualizacionPantalla():
     global cuentaPasos
     global x
+
 
 
     #FONDO EN MOVIMIENTO
@@ -272,6 +410,8 @@ def actualizacionPantalla():
     if x_bucle < Largo:
         SCREEN.blit(fondo,(x_bucle,0))
     x -= 1
+    pygame.draw.line(SCREEN, BLANCO, (0, 650), (1366, 650), 11)
+
 #_________________________________________NAVE SIN CLASE______________________________#
     '''
     #CONTADOR DE PASOS
@@ -297,12 +437,15 @@ Dios = True
 while Dios:
     #FPS
     RELOJ.tick(100)
+
     #LOS NUMEROS RANDOM
 
     #BUCLE EN EL JUEGO
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             Dios = False
+
+
 #_____________________________________ZONA DE TECLAS_____________________________________________#
     #OPCIÓN TECLA PULSADA
     keys = pygame.key.get_pressed()
@@ -335,8 +478,8 @@ while Dios:
         py += velocidad
 
     print("--------------NUMEROS ALEATORIOS GENERADOS-------------")
-    Up_down_direction = random.randint(1, 3)
-    Right_left_direction = random.randint(1, 3)
+    Up_down_direction = random.randint(1, 2)
+    Right_left_direction = random.randint(1, 2)
     print(Up_down_direction)
     print(Right_left_direction)
     Direccion_aleatoria_X = random.randint(4, 8)
@@ -348,23 +491,36 @@ while Dios:
 #___________________________________________ZONA DE VENTANA________________________________________________#
     #ACTUALIZACION DE LA VENTANA
     pygame.display.update()
+
     actualizacionPantalla()
 
     # Actualizar los sprites
     sprites.update()
-    Enemigoss.update()
+    Enemigo_1.update()
+
+    Enemigo_2.update()
+
+    Enemigo_3.update()
 
     #COLISIONES
-    Colission = pygame.sprite.spritecollide(Jugador, Enemigoss, True)
+    Colission_1 = pygame.sprite.spritecollide(Jugador, Enemigo_1, True)
+    Colission_2 = pygame.sprite.spritecollide(Jugador, Enemigo_2, True)
+    Colission_3 = pygame.sprite.spritecollide(Jugador, Enemigo_3, True)
 
 
     # PERSONALIZACION
 
     sprites.draw(pantalla)
-    Enemigoss.draw(pantalla)
+    Enemigo_1.draw(pantalla)
+
+    Enemigo_2.draw(pantalla)
+
+    Enemigo_3.draw(pantalla)
 
     # REFRESCA LA PANTALLA
     pygame.display.flip()
+
+
 
 
 
