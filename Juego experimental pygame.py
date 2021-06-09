@@ -26,10 +26,6 @@ SCREEN = pygame.display.set_mode((Largo,Alto))
 
 
 
-Direccion_aleatoria_X = random.randrange(1,10)
-Direccion_aleatoria_Y = random.randrange(1,10)
-#TITULO DE LA VENTANA
-
 
 
 
@@ -39,15 +35,17 @@ pygame.display.set_icon(icono)
 #FONDO ANIMADO
 fondo = pygame.image.load("Fondo_juego/fondo experimental.png").convert()
 
-
 #COLORES
-BLANCO=(255,255,255)
+BLANCO = (255,255,255)
+MORADO_LINDO = (39,22,56)
+
 
 #Música de fondo
 pygame.mixer.music.load('musica/Four brave Champios-theme.ogg')
 pygame.mixer.music.play(-1)
 
-#PERSONAJE
+#FONDO DE LA PANTALLA
+
 
 #___________________________________________________CLASE BARCO________________________________________________________#
 class Pirate_ship(pygame.sprite.Sprite):
@@ -356,6 +354,20 @@ Enemigo_1 = pygame.sprite.Group()
 Enemigo_2 = pygame.sprite.Group()
 Enemigo_3 = pygame.sprite.Group()
 
+#TEMPORIZADOR PARA EL JUEGO
+Contador = 0
+
+def mostrar_texto(pantalla,fuente,texto,color,dimensiones,x,y):
+    tipo_fuente = pygame.font.Font(fuente,dimensiones)
+    superficie = tipo_fuente.render(texto, True, color)
+    rectangle = superficie.get_rect()
+    rectangle.center((500),(600))
+    pantalla.blit(superficie, rectangle)
+
+
+
+
+#MOSTRAR CONTADOR EN PANTALLA
 
 #SPRITE ENEMIGOS
 Bullets = Enemigo()
@@ -392,17 +404,22 @@ RELOJ = pygame.time.Clock()
 izquierda = False
 derecha = False
 
-#AVANCE
-#cuentaPasos = 0
+#FUENTES
 
-#MOVIMIENTO
+Fuente_texto = pygame.font.Font(None,19)
+
 
 
 def actualizacionPantalla():
     global cuentaPasos
     global x
-
-
+    #COLOR DE FONDO
+    SCREEN.fill(MORADO_LINDO)
+    #UBICACION DE LOS TEXTOS EN LA PANTALLA
+    SCREEN.blit(miTexto2, (100, 700))
+    SCREEN.blit(miTexto,(250,700))
+    SCREEN.blit(miTexto3,(600,700))
+    SCREEN.blit(miTexto4,(800,700))
 
     #FONDO EN MOVIMIENTO
     x_bucle = x % fondo.get_rect().width
@@ -433,14 +450,27 @@ def actualizacionPantalla():
 
 #BUCLE PARA LA VENTANA
 Dios = True
-
+aux_Tiempo = 1
 while Dios:
-    #FPS
+#________FPS________________________________________________________________________________________________
     RELOJ.tick(100)
+    Tiempo = pygame.time.get_ticks()//1000
+    #PUNTAJES
+    Puntaje_level1 = Tiempo
+    Puntaje_level2 = Tiempo*3
+    Puntaje_level3 = Tiempo*5
 
-    #LOS NUMEROS RANDOM
 
-    #BUCLE EN EL JUEGO
+
+    if aux_Tiempo == Tiempo:
+        aux_Tiempo += 1
+
+    #TEXTOS EN LA PANTALLA
+    miTexto = Fuente_texto.render(str(Tiempo), bool(0), (BLANCO))
+    miTexto2 = Fuente_texto.render(("TEMPORIZADOR   :"), bool(0), (BLANCO))
+    miTexto3 = Fuente_texto.render(("PUNTAJE   :"), bool(0), (BLANCO))
+    miTexto4 = Fuente_texto.render(str(Puntaje_level1), bool(0), (BLANCO))
+#BUCLE EN EL JUEGO
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             Dios = False
@@ -477,16 +507,13 @@ while Dios:
     if keys[pygame.K_DOWN] and py < 610:
         py += velocidad
 
-    print("--------------NUMEROS ALEATORIOS GENERADOS-------------")
+    #ALEATORIOS ARRIBA-ABAJO-DERECHA-IZQUIERDA
     Up_down_direction = random.randint(1, 2)
     Right_left_direction = random.randint(1, 2)
-    print(Up_down_direction)
-    print(Right_left_direction)
+    #VALORES DE LOS EJES X y Y
     Direccion_aleatoria_X = random.randint(4, 8)
     Direccion_aleatoria_Y = random.randint(4, 8)
-    print(Direccion_aleatoria_X)
-    print(Direccion_aleatoria_Y)
-    print("--------------NUMEROS ALEATORIOS GENERADOS-------------")
+
 
 #___________________________________________ZONA DE VENTANA________________________________________________#
     #ACTUALIZACION DE LA VENTANA
@@ -508,18 +535,18 @@ while Dios:
     Colission_3 = pygame.sprite.spritecollide(Jugador, Enemigo_3, True)
 
 
+
+
     # PERSONALIZACION
 
     sprites.draw(pantalla)
+
     Enemigo_1.draw(pantalla)
-
     Enemigo_2.draw(pantalla)
-
     Enemigo_3.draw(pantalla)
 
     # REFRESCA LA PANTALLA
     pygame.display.flip()
-
 
 
 
