@@ -505,7 +505,7 @@ def actualizacionPantalla():
     SCREEN.blit(miTexto4,(520,700))
     SCREEN.blit(Life_counter,(1000,700))
     SCREEN.blit(Player_life,(1200,700))
-    if Health == 0:
+    if Health == 0 or Tiempo == 60:
         SCREEN.blit(Texto_fin_del_juego,(700,700))
     Linea_divisora = pygame.draw.line(SCREEN, BLANCO, (0, 650), (1366, 650), 20)
 
@@ -655,8 +655,5 @@ while Dios:
 
     # REFRESCA LA PANTALLA
     pygame.display.flip()
-
-
-
 
 pygame.quit()
