@@ -1,14 +1,14 @@
 '''
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-#                         Creadores:                            #
-#                                                               #
-#                     Josthin Soto Sánchez                      #
-#                     Axel Flores Lara                          #
-#                                                               #
-#                          Grupo 4                              #
-#                                                               #
-#                                                               #
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+                                        # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+                                        #                         Creadores:                            #
+                                        #                                                               #
+                                        #                     Josthin Soto Sánchez                      #
+                                        #                     Axel Flores Lara                          #
+                                        #                                                               #
+                                        #                          Grupo 4                              #
+                                        #                                                               #
+                                        #                                                               #
+                                        # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 '''
 #BIBLIOTECAS A USAR
 import pygame
@@ -35,17 +35,20 @@ pygame.display.set_icon(icono)
 #FONDO ANIMADO
 fondo = pygame.image.load("Fondo_juego/fondo experimental.png").convert()
 
+#EFECTO DE SONIDO METALICO
+Metalic_sound = pygame.mixer.Sound('musica/Sonido colision (mp3cut.net).ogg')
+
 #COLORES
 BLANCO = (255,255,255)
 MORADO_LINDO = (39,22,56)
-
 
 #Música de fondo
 pygame.mixer.music.load('musica/Four brave Champios-theme.ogg')
 pygame.mixer.music.play(-1)
 
-#FONDO DE LA PANTALLA
 
+Choque = False
+Decremento = False
 
 #___________________________________________________CLASE BARCO________________________________________________________#
 class Pirate_ship(pygame.sprite.Sprite):
@@ -62,10 +65,11 @@ class Pirate_ship(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         #ACOMODAR EL RECTANGULO/CENTRO
         self.rect.center = (Largo // 2, Alto // 2)
-
+        #VELOCIDAD INICIAL DE LA NAVE
         self.acceleracion_inicialX = 0
         self.acceleracion_inicialY = 0
-
+        #VIDA DE LA NAVE
+        self.hp = 3
 
 #______________________________________MOVIMIENTO NAVE 2___________________________________________#
     def update(self): #el UPDATE esta heredado, si se utiliza otra cosa dejará de funcionar
@@ -119,6 +123,7 @@ class Pirate_ship(pygame.sprite.Sprite):
 class Enemigo(pygame.sprite.Sprite):
     global spawn_X
     global spawn_Y
+    global Health
     # Sprite del barco
     def __init__(self):
         # Se hereda el init de la clase Sprite de pygame
@@ -138,56 +143,82 @@ class Enemigo(pygame.sprite.Sprite):
         self.acceleracion_inicialY = 1
 
     def update(self):
-
         # ACTUALIZA LA VELOCIDAD DEL PJ
         self.rect.x += self.acceleracion_inicialX
         self.rect.y += self.acceleracion_inicialY
 
         # LIMITAR EL BORDE  IZQUIERDO
         if self.rect.left <= 0:
+            Choque = True
+            Decremento = True
+            if Choque:
+                Metalic_sound.play()
+
             if Right_left_direction == 1:#CON ESTE LA BALA BAJA HACIA LA DERECHA
                 self.acceleracion_inicialX = Direccion_aleatoria_X
                 self.acceleracion_inicialY = Direccion_aleatoria_Y
 
+
+
             elif Right_left_direction == 2:#CON ESTE LA BALA SUBE HACIA LA DERECHA
                 self.acceleracion_inicialX = Direccion_aleatoria_X
                 self.acceleracion_inicialY = -Direccion_aleatoria_Y
+                pygame.mixer.Sound('musica/Sonido colision (mp3cut.net).ogg')
 
 
 
         # LIMITAR EL BORDE DERECHO
         elif self.rect.right >= Largo:
+            Choque = True
+
+            if Choque:
+                Metalic_sound.play()
             if Right_left_direction == 1:#CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
                 self.acceleracion_inicialX = -Direccion_aleatoria_X
                 self.acceleracion_inicialY = Direccion_aleatoria_Y
+                pygame.mixer.Sound('musica/Sonido colision (mp3cut.net).ogg')
+
 
             elif Right_left_direction == 2:#CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
                 self.acceleracion_inicialX = -Direccion_aleatoria_X
                 self.acceleracion_inicialY = -Direccion_aleatoria_Y
+                pygame.mixer.Sound('musica/Sonido colision (mp3cut.net).ogg')
 
 
 
         # LIMITAR EL BORDE INFERIOR
         elif self.rect.bottom >= 650:#CON ESTE LA BALA SUBE HACIA LA DERECHA
+            Choque = True
+
+            if Choque:
+                Metalic_sound.play()
             if Up_down_direction == 1:
                 self.acceleracion_inicialX = Direccion_aleatoria_X
                 self.acceleracion_inicialY = -Direccion_aleatoria_Y
+                pygame.mixer.Sound('musica/Sonido colision (mp3cut.net).ogg')
 
             elif Up_down_direction == 2:#CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
                 self.acceleracion_inicialX = -Direccion_aleatoria_X
                 self.acceleracion_inicialY = -Direccion_aleatoria_Y
+                pygame.mixer.Sound('musica/Sonido colision (mp3cut.net).ogg')
 
 
 
         # LIMITAR EL BORDE  SUPERIOR
         elif self.rect.top <= 0:
+            Choque = True
+
+            if Choque:
+                Metalic_sound.play()
             if Up_down_direction == 1:#CON ESTE LA BALA BAJA HACIA LA DERECHA
                 self.acceleracion_inicialX = Direccion_aleatoria_X
                 self.acceleracion_inicialY = Direccion_aleatoria_Y
+                pygame.mixer.Sound('musica/Sonido colision (mp3cut.net).ogg')
 
             elif Up_down_direction == 2:#CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
                 self.acceleracion_inicialX = -Direccion_aleatoria_X
                 self.acceleracion_inicialY = Direccion_aleatoria_Y
+                pygame.mixer.Sound('musica/Sonido colision (mp3cut.net).ogg')
 
 
 class Enemigo2(pygame.sprite.Sprite):
@@ -212,56 +243,81 @@ class Enemigo2(pygame.sprite.Sprite):
         self.acceleracion_inicialY = 1
 
     def update(self):
-
         # ACTUALIZA LA VELOCIDAD DEL PJ
         self.rect.x += self.acceleracion_inicialX
         self.rect.y += self.acceleracion_inicialY
 
         # LIMITAR EL BORDE  IZQUIERDO
         if self.rect.left <= 0:
+            Choque = True
+
+            if Choque:
+                Metalic_sound.play()
             if Right_left_direction == 1:#CON ESTE LA BALA BAJA HACIA LA DERECHA
                 self.acceleracion_inicialX = Direccion_aleatoria_X
                 self.acceleracion_inicialY = Direccion_aleatoria_Y
 
+
+
             elif Right_left_direction == 2:#CON ESTE LA BALA SUBE HACIA LA DERECHA
                 self.acceleracion_inicialX = Direccion_aleatoria_X
                 self.acceleracion_inicialY = -Direccion_aleatoria_Y
+                pygame.mixer.Sound('musica/Sonido colision (mp3cut.net).ogg')
 
 
 
         # LIMITAR EL BORDE DERECHO
         elif self.rect.right >= Largo:
+            Choque = True
+
+            if Choque:
+                Metalic_sound.play()
             if Right_left_direction == 1:#CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
                 self.acceleracion_inicialX = -Direccion_aleatoria_X
                 self.acceleracion_inicialY = Direccion_aleatoria_Y
+                pygame.mixer.Sound('musica/Sonido colision (mp3cut.net).ogg')
+
 
             elif Right_left_direction == 2:#CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
                 self.acceleracion_inicialX = -Direccion_aleatoria_X
                 self.acceleracion_inicialY = -Direccion_aleatoria_Y
+                pygame.mixer.Sound('musica/Sonido colision (mp3cut.net).ogg')
 
 
 
         # LIMITAR EL BORDE INFERIOR
         elif self.rect.bottom >= 650:#CON ESTE LA BALA SUBE HACIA LA DERECHA
+            Choque = True
+
+            if Choque:
+                Metalic_sound.play()
             if Up_down_direction == 1:
                 self.acceleracion_inicialX = Direccion_aleatoria_X
                 self.acceleracion_inicialY = -Direccion_aleatoria_Y
+                pygame.mixer.Sound('musica/Sonido colision (mp3cut.net).ogg')
 
             elif Up_down_direction == 2:#CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
                 self.acceleracion_inicialX = -Direccion_aleatoria_X
                 self.acceleracion_inicialY = -Direccion_aleatoria_Y
+                pygame.mixer.Sound('musica/Sonido colision (mp3cut.net).ogg')
 
 
 
         # LIMITAR EL BORDE  SUPERIOR
         elif self.rect.top <= 0:
+            Choque = True
+
+            if Choque:
+                Metalic_sound.play()
             if Up_down_direction == 1:#CON ESTE LA BALA BAJA HACIA LA DERECHA
                 self.acceleracion_inicialX = Direccion_aleatoria_X
                 self.acceleracion_inicialY = Direccion_aleatoria_Y
+                pygame.mixer.Sound('musica/Sonido colision (mp3cut.net).ogg')
 
             elif Up_down_direction == 2:#CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
                 self.acceleracion_inicialX = -Direccion_aleatoria_X
                 self.acceleracion_inicialY = Direccion_aleatoria_Y
+                pygame.mixer.Sound('musica/Sonido colision (mp3cut.net).ogg')
 
 class Enemigo3(pygame.sprite.Sprite):
     global spawn_X
@@ -285,57 +341,81 @@ class Enemigo3(pygame.sprite.Sprite):
         self.acceleracion_inicialY = 1
 
     def update(self):
-
         # ACTUALIZA LA VELOCIDAD DEL PJ
         self.rect.x += self.acceleracion_inicialX
         self.rect.y += self.acceleracion_inicialY
 
         # LIMITAR EL BORDE  IZQUIERDO
         if self.rect.left <= 0:
+            Choque = True
+
+            if Choque:
+                Metalic_sound.play()
             if Right_left_direction == 1:#CON ESTE LA BALA BAJA HACIA LA DERECHA
                 self.acceleracion_inicialX = Direccion_aleatoria_X
                 self.acceleracion_inicialY = Direccion_aleatoria_Y
 
+
+
             elif Right_left_direction == 2:#CON ESTE LA BALA SUBE HACIA LA DERECHA
                 self.acceleracion_inicialX = Direccion_aleatoria_X
                 self.acceleracion_inicialY = -Direccion_aleatoria_Y
+                pygame.mixer.Sound('musica/Sonido colision (mp3cut.net).ogg')
 
 
 
         # LIMITAR EL BORDE DERECHO
         elif self.rect.right >= Largo:
+            Choque = True
+
+            if Choque:
+                Metalic_sound.play()
             if Right_left_direction == 1:#CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
                 self.acceleracion_inicialX = -Direccion_aleatoria_X
                 self.acceleracion_inicialY = Direccion_aleatoria_Y
+                pygame.mixer.Sound('musica/Sonido colision (mp3cut.net).ogg')
+
 
             elif Right_left_direction == 2:#CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
                 self.acceleracion_inicialX = -Direccion_aleatoria_X
                 self.acceleracion_inicialY = -Direccion_aleatoria_Y
+                pygame.mixer.Sound('musica/Sonido colision (mp3cut.net).ogg')
 
 
 
         # LIMITAR EL BORDE INFERIOR
         elif self.rect.bottom >= 650:#CON ESTE LA BALA SUBE HACIA LA DERECHA
+            Choque = True
+
+            if Choque:
+                Metalic_sound.play()
             if Up_down_direction == 1:
                 self.acceleracion_inicialX = Direccion_aleatoria_X
                 self.acceleracion_inicialY = -Direccion_aleatoria_Y
+                pygame.mixer.Sound('musica/Sonido colision (mp3cut.net).ogg')
 
             elif Up_down_direction == 2:#CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
                 self.acceleracion_inicialX = -Direccion_aleatoria_X
                 self.acceleracion_inicialY = -Direccion_aleatoria_Y
+                pygame.mixer.Sound('musica/Sonido colision (mp3cut.net).ogg')
 
 
 
         # LIMITAR EL BORDE  SUPERIOR
         elif self.rect.top <= 0:
+            Choque = True
+
+            if Choque:
+                Metalic_sound.play()
             if Up_down_direction == 1:#CON ESTE LA BALA BAJA HACIA LA DERECHA
                 self.acceleracion_inicialX = Direccion_aleatoria_X
                 self.acceleracion_inicialY = Direccion_aleatoria_Y
+                pygame.mixer.Sound('musica/Sonido colision (mp3cut.net).ogg')
 
             elif Up_down_direction == 2:#CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
                 self.acceleracion_inicialX = -Direccion_aleatoria_X
                 self.acceleracion_inicialY = Direccion_aleatoria_Y
-
+                pygame.mixer.Sound('musica/Sonido colision (mp3cut.net).ogg')
 
 
 
@@ -349,25 +429,10 @@ clock = pygame.time.Clock()
 
 #_______________________________________________SPRITES______________________________________________________________
 
-sprites = pygame.sprite.Group()
+jugador = pygame.sprite.Group()
 Enemigo_1 = pygame.sprite.Group()
 Enemigo_2 = pygame.sprite.Group()
 Enemigo_3 = pygame.sprite.Group()
-
-#TEMPORIZADOR PARA EL JUEGO
-Contador = 0
-
-def mostrar_texto(pantalla,fuente,texto,color,dimensiones,x,y):
-    tipo_fuente = pygame.font.Font(fuente,dimensiones)
-    superficie = tipo_fuente.render(texto, True, color)
-    rectangle = superficie.get_rect()
-    rectangle.center((500),(600))
-    pantalla.blit(superficie, rectangle)
-
-
-
-
-#MOSTRAR CONTADOR EN PANTALLA
 
 #SPRITE ENEMIGOS
 Bullets = Enemigo()
@@ -381,7 +446,25 @@ Enemigo_3.add((Bullets3))
 #SPRITE JUGADOR
 
 Jugador = Pirate_ship()
-sprites.add((Jugador))
+jugador.add((Jugador))
+
+
+
+
+
+
+def mostrar_texto(pantalla,fuente,texto,color,dimensiones):
+    tipo_fuente = pygame.font.Font(fuente,dimensiones)
+    superficie = tipo_fuente.render(texto, True, color)
+    rectangle = superficie.get_rect()
+    rectangle.center((500),(600))
+    pantalla.blit(superficie, rectangle)
+
+
+
+
+
+
 #____________________________________________________________________________________________________________________
 
 
@@ -416,10 +499,16 @@ def actualizacionPantalla():
     #COLOR DE FONDO
     SCREEN.fill(MORADO_LINDO)
     #UBICACION DE LOS TEXTOS EN LA PANTALLA
-    SCREEN.blit(miTexto2, (100, 700))
-    SCREEN.blit(miTexto,(250,700))
-    SCREEN.blit(miTexto3,(600,700))
-    SCREEN.blit(miTexto4,(800,700))
+    SCREEN.blit(miTexto2, (50, 700))
+    SCREEN.blit(miTexto,(200,700))
+    SCREEN.blit(miTexto3,(400,700))
+    SCREEN.blit(miTexto4,(520,700))
+    SCREEN.blit(Life_counter,(1000,700))
+    SCREEN.blit(Player_life,(1200,700))
+    if Health == 0:
+        SCREEN.blit(Texto_fin_del_juego,(700,700))
+    Linea_divisora = pygame.draw.line(SCREEN, BLANCO, (0, 650), (1366, 650), 20)
+
 
     #FONDO EN MOVIMIENTO
     x_bucle = x % fondo.get_rect().width
@@ -427,9 +516,10 @@ def actualizacionPantalla():
     if x_bucle < Largo:
         SCREEN.blit(fondo,(x_bucle,0))
     x -= 1
-    pygame.draw.line(SCREEN, BLANCO, (0, 650), (1366, 650), 11)
 
-#_________________________________________NAVE SIN CLASE______________________________#
+
+
+    #_________________________________________NAVE SIN CLASE______________________________#
     '''
     #CONTADOR DE PASOS
     if cuentaPasos + 1 >= 4:
@@ -451,6 +541,8 @@ def actualizacionPantalla():
 #BUCLE PARA LA VENTANA
 Dios = True
 aux_Tiempo = 1
+#VIDA DEL JUGADOR
+Health = 3
 while Dios:
 #________FPS________________________________________________________________________________________________
     RELOJ.tick(100)
@@ -460,6 +552,7 @@ while Dios:
     Puntaje_level2 = Tiempo*3
     Puntaje_level3 = Tiempo*5
 
+#Health = 3
 
 
     if aux_Tiempo == Tiempo:
@@ -470,6 +563,10 @@ while Dios:
     miTexto2 = Fuente_texto.render(("TEMPORIZADOR   :"), bool(0), (BLANCO))
     miTexto3 = Fuente_texto.render(("PUNTAJE   :"), bool(0), (BLANCO))
     miTexto4 = Fuente_texto.render(str(Puntaje_level1), bool(0), (BLANCO))
+    Life_counter = Fuente_texto.render(str("VIDA DEL JUGADOR  :"), bool(0), (BLANCO))
+    Player_life = Fuente_texto.render(str(Health), bool(0), (BLANCO))
+    Texto_fin_del_juego = Fuente_texto.render(("GAME OVER"), bool(0), (BLANCO))
+
 #BUCLE EN EL JUEGO
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -522,25 +619,36 @@ while Dios:
     actualizacionPantalla()
 
     # Actualizar los sprites
-    sprites.update()
+    jugador.update()
+
     Enemigo_1.update()
 
     Enemigo_2.update()
 
     Enemigo_3.update()
 
-    #COLISIONES
-    Colission_1 = pygame.sprite.spritecollide(Jugador, Enemigo_1, True)
-    Colission_2 = pygame.sprite.spritecollide(Jugador, Enemigo_2, True)
-    Colission_3 = pygame.sprite.spritecollide(Jugador, Enemigo_3, True)
+#______________________COLISIONES______________________________________________________________________________________
 
 
+    Colission_1 = pygame.sprite.groupcollide(Enemigo_1, jugador, True, False,pygame.sprite.collide_rect)
 
+    Colission_2 = pygame.sprite.groupcollide(Enemigo_2, jugador, True, False, pygame.sprite.collide_rect)
 
+    Colission_3 = pygame.sprite.groupcollide(Enemigo_3, jugador, True, False, pygame.sprite.collide_rect)
+
+    Space_ship_collision = pygame.sprite.spritecollide(Jugador,Enemigo_1, True)
+
+    if Colission_1:
+        Health -=1
+
+    if Colission_2:
+        Health -=1
+
+    if Colission_3:
+        Health -=1
     # PERSONALIZACION
 
-    sprites.draw(pantalla)
-
+    jugador.draw(pantalla)
     Enemigo_1.draw(pantalla)
     Enemigo_2.draw(pantalla)
     Enemigo_3.draw(pantalla)
