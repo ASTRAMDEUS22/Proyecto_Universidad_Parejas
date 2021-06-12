@@ -2,21 +2,27 @@
 import pygame, sys
 from pygame.locals import *
 import random
+import pygame
+
 
 #PANTALLAS DE JUEGO
-Alto = 500
-Largo = 500
+
 Largo_2 = 1366
 Alto_2 = 768
 
 #CONTROL DE FPS/PESTAÑA ABIERTA
 Clock = pygame.time.Clock()
 pygame.init()
-pygame.display.set_caption("PRUEBA DE MENUS")
-SCREEN = pygame.display.set_mode((500,500),0,32)
-
+pygame.display.set_caption("PIRATES IN THE SKY")
+SCREEN = pygame.display.set_mode((1366,768),0,32)
+SCREEN_Menu = pygame.display.set_mode((1366,768),0,32)
+Screen_Welcome = pygame.display.set_mode((1366,768),0,32)
 #FUENTES
 font = pygame.font.Font (None, 30)
+font_menu = pygame.font.Font(None,60)
+font_buttons = pygame.font.Font(None,12)
+#MUSICA/EFECTOS
+
 
 Metalic_sound = pygame.mixer.Sound('musica/Sonido colision (mp3cut.net).ogg')
 
@@ -28,8 +34,8 @@ MORADO_LINDO = (39, 22, 56)
 Health = 3
 
 #FONDO DEL JUEGO
-fondo = pygame.image.load("Fondo_juego/fondo experimental.png").convert()
-
+fondo = pygame.image.load("Fondo_juego/desert better.jpg").convert()
+fondo_Menu = pygame.image.load("Fondo_juego/Sky_ship2.jpg").convert()
 #FUENTE DE TEXTO Y TAMAÑO DE LETRA
 Fuente_texto = pygame.font.Font(None, 19)
 
@@ -50,35 +56,79 @@ def draw_text(text, font, color, surface,x,y):
 
 #VARIABLE PARA ACTIVAR EL BOTON
 click = False
-def main_menu():
+
+click_menu = False
+Menu = False
+def Welcome_Window():
+    click_menu = False
     while True:
+
+        # VENTANA
+        pantalla.fill((54,45,45))
+        draw_text("WELCOME TO PIRATES IN THE SKY", font, (0, 0, 0), pantalla, 520, 70)
+        draw_text("Nivel 1", font, (0, 0, 0), pantalla, 110, 200)
+        # Detectar el click del mouse
+        mx, my = pygame.mouse.get_pos()
+
+        # BOTON
+        Button_Welcome = pygame.Rect(50, 200, 50, 50)
+
+        if Button_Welcome.collidepoint((mx, my)):
+            if click_menu:
+                Menu_juego()
+
+        pygame.draw.rect(pantalla, (0, 255, 0), Button_Welcome)
+
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    pygame.quit()
+                    sys.exit()
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    click_menu = True
+        pygame.display.update()
+
+def Menu_juego():
+    pygame.mixer.music.load('musica/Imposible TSH remix.ogg')
+    pygame.mixer.music.play(0)
+    Menu = True
+    click = False
+    while Menu:
 
 
         #VENTANA
-        SCREEN.fill((255,255,255))
-        draw_text("Main_menu", font,(0,0,0), SCREEN,20,20)
+        SCREEN_Menu.blit(fondo_Menu,(1,1))
+        #SCREEN_Menu.blit(fondo, (0, 0))
+        draw_text("THE PIRATES IN THE SKY", font,(0,0,0), pantalla,520,70)
+        draw_text("Nivel 1", font, (0, 0, 0), pantalla, 110, 200)
         #Detectar el click del mouse
         mx,my = pygame.mouse.get_pos()
 
 
         #BOTON
-        Button_1 = pygame.Rect(50,200,300,50)
-        Button_2 = pygame.Rect(50,400,300,50)
-        Button_3 = pygame.Rect(50, 600, 300, 50)
+        Button_1 = pygame.Rect(50,200,50,50)
+        Button_2 = pygame.Rect(50,400,50,50)
+        Button_3 = pygame.Rect(50, 600, 50, 50)
         if Button_1.collidepoint((mx,my)):
             if click:
                 Nivel_Uno()
-        if Button_2.collidepoint((mx,my)):
+        elif Button_2.collidepoint((mx,my)):
             if click:
                 Nivel_Dos()
-        if Button_3.collidepoint((mx,my)):
+        elif Button_3.collidepoint((mx,my)):
             if click:
                 Nivel_Tres()
-        pygame.draw.rect(SCREEN,(0,255,0),Button_1)
-        pygame.draw.rect(SCREEN, (255, 0, 0), Button_2)
-        pygame.draw.rect(SCREEN, (0, 0, 255), Button_3)
-        click = False
+        pygame.draw.rect(pantalla,(0,255,0),Button_1)
+        pygame.draw.rect(pantalla, (255, 0, 0), Button_2)
+        pygame.draw.rect(pantalla, (0, 0, 255), Button_3)
+
         for event in pygame.event.get():
+            click = False
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
@@ -95,7 +145,8 @@ def main_menu():
 
 def Nivel_Uno():
     running = True
-    Musica = True
+    pygame.mixer.music.load('musica/Remix Four brave champions.ogg')
+    pygame.mixer.music.play(0)
     global x
     while running:
 
@@ -491,7 +542,8 @@ def Nivel_Uno():
         # FUENTES
         Fuente_texto = pygame.font.Font(None, 19)
 
-
+        #BOTONES
+        Button_Menu = pygame.Rect(100,630,60,20)
 
         # BUCLE PARA LA VENTANA
         Dios = True
@@ -507,16 +559,16 @@ def Nivel_Uno():
             SCREEN.fill(MORADO_LINDO)
 
             # UBICACION DE LOS TEXTOS EN LA PANTALLA
-            SCREEN.blit(miTexto2, (50, 700))
-            SCREEN.blit(miTexto, (200, 700))
-            SCREEN.blit(miTexto3, (400, 700))
-            SCREEN.blit(miTexto4, (520, 700))
+            SCREEN.blit(miTexto2, (50, 680))
+            SCREEN.blit(miTexto, (220, 680))
+            SCREEN.blit(miTexto3, (50, 720))
+            SCREEN.blit(miTexto4, (220, 720))
             SCREEN.blit(Life_counter, (1000, 700))
             SCREEN.blit(Player_life, (1200, 700))
 
             if Health == 0 or Tiempo >= 60:
-                SCREEN.blit(Texto_fin_del_juego, (700, 700))
-
+                #SCREEN.blit(Texto_fin_del_juego, (700, 700))
+                Gamer_over()
             Linea_divisora = pygame.draw.line(SCREEN, BLANCO, (0, 650), (1366, 650), 20)
 
             # FONDO EN MOVIMIENTO
@@ -583,7 +635,7 @@ def Nivel_Uno():
 
             Colission_3 = pygame.sprite.groupcollide(Enemigo_3, jugador, True, False, pygame.sprite.collide_rect)
 
-            Space_ship_collision = pygame.sprite.spritecollide(Jugador, Enemigo_1, True)
+
 
             # SI LA BOMBA CHOCA CON LA NAVE SE RESTA LA VIDA
             if Colission_1:
@@ -595,12 +647,13 @@ def Nivel_Uno():
             if Colission_3:
                 Health -= 1
 
+
             # MOSTRAR AL JUGADOR Y ENEMIGOS EN LA PANTALLA
             jugador.draw(pantalla)
             Enemigo_1.draw(pantalla)
             Enemigo_2.draw(pantalla)
             Enemigo_3.draw(pantalla)
-
+            pygame.draw.rect(pantalla,(255,255,255),Button_Menu)
 
 
 
@@ -1094,7 +1147,7 @@ def Nivel_Dos():
 
             Colission_3 = pygame.sprite.groupcollide(Enemigo_3, jugador, True, False, pygame.sprite.collide_rect)
 
-            Space_ship_collision = pygame.sprite.spritecollide(Jugador, Enemigo_1, True)
+
 
             # SI LA BOMBA CHOCA CON LA NAVE SE RESTA LA VIDA
             if Colission_1:
@@ -1618,4 +1671,59 @@ def Nivel_Tres():
             Enemigo_1.draw(pantalla)
             Enemigo_2.draw(pantalla)
             Enemigo_3.draw(pantalla)
-main_menu()
+
+click_Menu = False
+#VENTANA DEL GAMER OVER
+def Gamer_over():
+    running = True
+
+    pygame.mixer.music.load('musica/Arcangel two steps from hell.ogg')
+    pygame.mixer.music.play(0)
+    while running:
+        click_Menu = False
+        SCREEN_Menu.fill((MORADO_LINDO))
+        draw_text("¡GAMER OVER!", font_menu, (255, 255, 255), SCREEN_Menu, 520, 300)
+        mx, my = pygame.mouse.get_pos()
+
+        # BOTON
+        Button_Menu = pygame.Rect(50, 200, 50, 50)
+        #Button_2 = pygame.Rect(50, 400, 50, 50)
+        #Button_3 = pygame.Rect(50, 600, 50, 50)
+        pygame.draw.rect(SCREEN_Menu, (0, 255, 0), Button_Menu)
+
+
+
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    pygame.quit()
+                    sys.exit()
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    click_Menu = True
+
+        if Button_Menu.collidepoint((mx, my)):
+            if click_Menu:
+                Menu_juego()
+
+        pygame.display.update()
+        Clock.tick(60)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Welcome_Window()
