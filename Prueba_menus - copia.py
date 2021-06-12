@@ -14,9 +14,14 @@ Alto_2 = 768
 Clock = pygame.time.Clock()
 pygame.init()
 pygame.display.set_caption("PIRATES IN THE SKY")
-SCREEN = pygame.display.set_mode((1366,768),0,32)
+
+#VENTANAS
+SCREEN_Welcome = pygame.display.set_mode((1366,768),0,32)
 SCREEN_Menu = pygame.display.set_mode((1366,768),0,32)
-Screen_Welcome = pygame.display.set_mode((1366,768),0,32)
+SCREEN_Level1 = pygame.display.set_mode((1366,768),0,32)
+SCREEN_Level2 = pygame.display.set_mode((Largo_2, Alto_2))
+SCREEN_Level3 = pygame.display.set_mode((1366,768),0,32)
+SCREEN_Gamer_Over = pygame.display.set_mode((1366,768),0,32)
 #FUENTES
 font = pygame.font.Font (None, 30)
 font_menu = pygame.font.Font(None,60)
@@ -34,13 +39,13 @@ MORADO_LINDO = (39, 22, 56)
 Health = 3
 
 #FONDO DEL JUEGO
-fondo = pygame.image.load("Fondo_juego/desert better.jpg").convert()
+fondo = pygame.image.load("Fondo_juego/fondo experimental.png").convert()
 fondo_Menu = pygame.image.load("Fondo_juego/Sky_ship2.jpg").convert()
 #FUENTE DE TEXTO Y TAMAÑO DE LETRA
 Fuente_texto = pygame.font.Font(None, 19)
 
 #pantalla de no se que
-pantalla = pygame.display.set_mode((Largo_2, Alto_2))
+
 
 #X XD
 x = 0
@@ -64,9 +69,9 @@ def Welcome_Window():
     while True:
 
         # VENTANA
-        pantalla.fill((54,45,45))
-        draw_text("WELCOME TO PIRATES IN THE SKY", font, (0, 0, 0), pantalla, 520, 70)
-        draw_text("Nivel 1", font, (0, 0, 0), pantalla, 110, 200)
+        SCREEN_Welcome.fill((54,45,45))
+        draw_text("WELCOME TO PIRATES IN THE SKY", font, (0, 0, 0), SCREEN_Welcome, 520, 70)
+        draw_text("Nivel 1", font, (0, 0, 0), SCREEN_Welcome, 110, 200)
         # Detectar el click del mouse
         mx, my = pygame.mouse.get_pos()
 
@@ -77,7 +82,7 @@ def Welcome_Window():
             if click_menu:
                 Menu_juego()
 
-        pygame.draw.rect(pantalla, (0, 255, 0), Button_Welcome)
+        pygame.draw.rect(SCREEN_Welcome, (0, 255, 0), Button_Welcome)
 
 
         for event in pygame.event.get():
@@ -104,8 +109,8 @@ def Menu_juego():
         #VENTANA
         SCREEN_Menu.blit(fondo_Menu,(1,1))
         #SCREEN_Menu.blit(fondo, (0, 0))
-        draw_text("THE PIRATES IN THE SKY", font,(0,0,0), pantalla,520,70)
-        draw_text("Nivel 1", font, (0, 0, 0), pantalla, 110, 200)
+        draw_text("THE PIRATES IN THE SKY", font,(0,0,0), SCREEN_Menu,520,70)
+        draw_text("Nivel 1", font, (0, 0, 0), SCREEN_Menu, 110, 200)
         #Detectar el click del mouse
         mx,my = pygame.mouse.get_pos()
 
@@ -123,12 +128,12 @@ def Menu_juego():
         elif Button_3.collidepoint((mx,my)):
             if click:
                 Nivel_Tres()
-        pygame.draw.rect(pantalla,(0,255,0),Button_1)
-        pygame.draw.rect(pantalla, (255, 0, 0), Button_2)
-        pygame.draw.rect(pantalla, (0, 0, 255), Button_3)
+        pygame.draw.rect(SCREEN_Menu,(0,255,0),Button_1)
+        pygame.draw.rect(SCREEN_Menu, (255, 0, 0), Button_2)
+        pygame.draw.rect(SCREEN_Menu, (0, 0, 255), Button_3)
 
         for event in pygame.event.get():
-            click = False
+
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
@@ -145,6 +150,7 @@ def Menu_juego():
 
 def Nivel_Uno():
     running = True
+    Timer = False
     pygame.mixer.music.load('musica/Remix Four brave champions.ogg')
     pygame.mixer.music.play(0)
     global x
@@ -510,7 +516,7 @@ def Nivel_Uno():
 
         pygame.display.set_caption("¡¡THE PIRATES IN THE SKY!!")
 
-        clock = pygame.time.Clock()
+
 
         # _______________________________________________SPRITES______________________________________________________________
 
@@ -537,6 +543,7 @@ def Nivel_Uno():
         x = 0
 
         # CENTRO DE FPS
+
         RELOJ = pygame.time.Clock()
 
         # FUENTES
@@ -556,38 +563,39 @@ def Nivel_Uno():
             global x
 
             # COLOR DE FONDO
-            SCREEN.fill(MORADO_LINDO)
+            SCREEN_Level1.fill(MORADO_LINDO)
 
             # UBICACION DE LOS TEXTOS EN LA PANTALLA
-            SCREEN.blit(miTexto2, (50, 680))
-            SCREEN.blit(miTexto, (220, 680))
-            SCREEN.blit(miTexto3, (50, 720))
-            SCREEN.blit(miTexto4, (220, 720))
-            SCREEN.blit(Life_counter, (1000, 700))
-            SCREEN.blit(Player_life, (1200, 700))
+            SCREEN_Level1.blit(miTexto2, (50, 680))
+            SCREEN_Level1.blit(miTexto, (220, 680))
+            SCREEN_Level1.blit(miTexto3, (50, 720))
+            SCREEN_Level1.blit(miTexto4, (220, 720))
+            SCREEN_Level1.blit(Life_counter, (1000, 700))
+            SCREEN_Level1.blit(Player_life, (1200, 700))
 
             if Health == 0 or Tiempo >= 60:
                 #SCREEN.blit(Texto_fin_del_juego, (700, 700))
                 Gamer_over()
-            Linea_divisora = pygame.draw.line(SCREEN, BLANCO, (0, 650), (1366, 650), 20)
+            Linea_divisora = pygame.draw.line(SCREEN_Level1, BLANCO, (0, 650), (1366, 650), 20)
 
             # FONDO EN MOVIMIENTO
             x_bucle = x % fondo.get_rect().width
-            SCREEN.blit(fondo, (x_bucle - fondo.get_rect().width, 0))
+            SCREEN_Level1.blit(fondo, (x_bucle - fondo.get_rect().width, 0))
             if x_bucle < Largo_2:
-                SCREEN.blit(fondo, (x_bucle, 0))
+                SCREEN_Level1.blit(fondo, (x_bucle, 0))
             x -= 1
         while Dios:
 
             # ________FPS________________________________________________________________________________________________
             RELOJ.tick(100)
-            Tiempo = pygame.time.get_ticks() // 1000
+            if Dios:
+                Tiempo = pygame.time.get_ticks() // 1000
             # PUNTAJES
             Puntaje_level1 = Tiempo
-            Puntaje_level2 = Tiempo * 3
-            Puntaje_level3 = Tiempo * 5
+
 
             # CONTADOR DE TIEMPO
+
             if aux_Tiempo == Tiempo:
                 aux_Tiempo += 1
 
@@ -1017,6 +1025,102 @@ def Nivel_Dos():
                         self.acceleracion_inicialX = -Direccion_aleatoria_X
                         self.acceleracion_inicialY = Direccion_aleatoria_Y
 
+
+        class Enemigo4(pygame.sprite.Sprite):
+
+            # Sprite del barco
+            def __init__(self):
+                # Se hereda el init de la clase Sprite de pygame
+                super().__init__()
+                # La bala/rectangulo
+                self.image = pygame.image.load("imagenes_adicionales/bomba_class4.png").convert()
+                self.image.set_colorkey("black")
+
+                # Se obtiene el rectangulo
+                self.rect = self.image.get_rect()
+                # ACOMODAR EL RECTANGULO/CENTRO
+                self.rect.center = (Largo_2 // 4, Alto_2 // 4)
+                self.rect.x = random.randrange(1, 100)
+                self.rect.y = random.randrange(1, 100)
+
+                self.acceleracion_inicialX = -1
+                self.acceleracion_inicialY = -1
+
+            def update(self):
+                # ACTUALIZA LA VELOCIDAD DEL PJ
+                self.rect.x += self.acceleracion_inicialX
+                self.rect.y += self.acceleracion_inicialY
+
+                # LIMITAR EL BORDE  IZQUIERDO
+                if self.rect.left <= 0:
+                    Choque = True
+
+                    if Choque:
+                        Metalic_sound.play()
+                    if Right_left_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA DERECHA
+                        self.acceleracion_inicialX = Direccion_aleatoria_X
+                        self.acceleracion_inicialY = Direccion_aleatoria_Y
+
+
+
+                    elif Right_left_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA DERECHA
+                        self.acceleracion_inicialX = Direccion_aleatoria_X
+                        self.acceleracion_inicialY = -Direccion_aleatoria_Y
+
+
+
+
+                # LIMITAR EL BORDE DERECHO
+                elif self.rect.right >= Largo_2:
+                    Choque = True
+
+                    if Choque:
+                        Metalic_sound.play()
+                    if Right_left_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
+                        self.acceleracion_inicialX = -Direccion_aleatoria_X
+                        self.acceleracion_inicialY = Direccion_aleatoria_Y
+
+
+
+                    elif Right_left_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
+                        self.acceleracion_inicialX = -Direccion_aleatoria_X
+                        self.acceleracion_inicialY = -Direccion_aleatoria_Y
+
+
+
+
+                # LIMITAR EL BORDE INFERIOR
+                elif self.rect.bottom >= 650:  # CON ESTE LA BALA SUBE HACIA LA DERECHA
+                    Choque = True
+
+                    if Choque:
+                        Metalic_sound.play()
+                    if Up_down_direction == 1:
+                        self.acceleracion_inicialX = Direccion_aleatoria_X
+                        self.acceleracion_inicialY = -Direccion_aleatoria_Y
+
+
+                    elif Up_down_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
+                        self.acceleracion_inicialX = -Direccion_aleatoria_X
+                        self.acceleracion_inicialY = -Direccion_aleatoria_Y
+
+
+
+
+                # LIMITAR EL BORDE  SUPERIOR
+                elif self.rect.top <= 0:
+                    Choque = True
+
+                    if Choque:
+                        Metalic_sound.play()
+                    if Up_down_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA DERECHA
+                        self.acceleracion_inicialX = Direccion_aleatoria_X
+                        self.acceleracion_inicialY = Direccion_aleatoria_Y
+
+
+                    elif Up_down_direction == 2:  # CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
+                        self.acceleracion_inicialX = -Direccion_aleatoria_X
+                        self.acceleracion_inicialY = Direccion_aleatoria_Y
         # _____________________________________________CREACION DE LA VENTANA_____________________________________________________#
         pygame.init()
         pantalla = pygame.display.set_mode((Largo_2, Alto_2))
@@ -1031,7 +1135,7 @@ def Nivel_Dos():
         Enemigo_1 = pygame.sprite.Group()
         Enemigo_2 = pygame.sprite.Group()
         Enemigo_3 = pygame.sprite.Group()
-
+        Enemigo_4 = pygame.sprite.Group()
         # SPRITE ENEMIGOS
         Bullets = Enemigo()
         Enemigo_1.add(Bullets)
@@ -1041,6 +1145,10 @@ def Nivel_Dos():
 
         Bullets3 = Enemigo3()
         Enemigo_3.add(Bullets3)
+
+        Bullets4 = Enemigo4()
+        Enemigo_4.add(Bullets4)
+
         # SPRITE JUGADOR
 
         Jugador = Pirate_ship()
@@ -1068,26 +1176,26 @@ def Nivel_Dos():
             global x
 
             # COLOR DE FONDO
-            SCREEN.fill(MORADO_LINDO)
+            SCREEN_Level2.fill(MORADO_LINDO)
 
             # UBICACION DE LOS TEXTOS EN LA PANTALLA
-            SCREEN.blit(miTexto2, (50, 700))
-            SCREEN.blit(miTexto, (200, 700))
-            SCREEN.blit(miTexto3, (400, 700))
-            SCREEN.blit(miTexto4, (520, 700))
-            SCREEN.blit(Life_counter, (1000, 700))
-            SCREEN.blit(Player_life, (1200, 700))
+            SCREEN_Level2.blit(miTexto2, (50, 700))
+            SCREEN_Level2.blit(miTexto, (200, 700))
+            SCREEN_Level2.blit(miTexto3, (400, 700))
+            SCREEN_Level2.blit(miTexto4, (520, 700))
+            SCREEN_Level2.blit(Life_counter, (1000, 700))
+            SCREEN_Level2.blit(Player_life, (1200, 700))
 
             if Health == 0 or Tiempo >= 60:
-                SCREEN.blit(Texto_fin_del_juego, (700, 700))
+                SCREEN_Level2.blit(Texto_fin_del_juego, (700, 700))
 
-            Linea_divisora = pygame.draw.line(SCREEN, BLANCO, (0, 650), (1366, 650), 20)
+            Linea_divisora = pygame.draw.line(SCREEN_Level2, BLANCO, (0, 650), (1366, 650), 20)
 
             # FONDO EN MOVIMIENTO
             x_bucle = x % fondo.get_rect().width
-            SCREEN.blit(fondo, (x_bucle - fondo.get_rect().width, 0))
+            SCREEN_Level2.blit(fondo, (x_bucle - fondo.get_rect().width, 0))
             if x_bucle < Largo_2:
-                SCREEN.blit(fondo, (x_bucle, 0))
+                SCREEN_Level2.blit(fondo, (x_bucle, 0))
             x -= 1
         while Dios:
 
@@ -1139,6 +1247,7 @@ def Nivel_Dos():
 
             Enemigo_3.update()
 
+            Enemigo_4.update()
             # ______________________COLISIONES______________________________________________________________________________________
 
             Colission_1 = pygame.sprite.groupcollide(Enemigo_1, jugador, True, False, pygame.sprite.collide_rect)
@@ -1147,7 +1256,7 @@ def Nivel_Dos():
 
             Colission_3 = pygame.sprite.groupcollide(Enemigo_3, jugador, True, False, pygame.sprite.collide_rect)
 
-
+            Colission_4 = pygame.sprite.groupcollide(Enemigo_4, jugador, True, False, pygame.sprite.collide_rect)
 
             # SI LA BOMBA CHOCA CON LA NAVE SE RESTA LA VIDA
             if Colission_1:
@@ -1159,12 +1268,14 @@ def Nivel_Dos():
             if Colission_3:
                 Health -= 1
 
+            if Colission_4:
+                Health -= 1
             # MOSTRAR AL JUGADOR Y ENEMIGOS EN LA PANTALLA
             jugador.draw(pantalla)
             Enemigo_1.draw(pantalla)
             Enemigo_2.draw(pantalla)
             Enemigo_3.draw(pantalla)
-
+            Enemigo_4.draw(pantalla)
 def Nivel_Tres():
     running = True
     Musica = True
@@ -1576,26 +1687,26 @@ def Nivel_Tres():
             global x
 
             # COLOR DE FONDO
-            SCREEN.fill(MORADO_LINDO)
+            SCREEN_Level3.fill(MORADO_LINDO)
 
             # UBICACION DE LOS TEXTOS EN LA PANTALLA
-            SCREEN.blit(miTexto2, (50, 700))
-            SCREEN.blit(miTexto, (200, 700))
-            SCREEN.blit(miTexto3, (400, 700))
-            SCREEN.blit(miTexto4, (520, 700))
-            SCREEN.blit(Life_counter, (1000, 700))
-            SCREEN.blit(Player_life, (1200, 700))
+            SCREEN_Level3.blit(miTexto2, (50, 700))
+            SCREEN_Level3.blit(miTexto, (200, 700))
+            SCREEN_Level3.blit(miTexto3, (400, 700))
+            SCREEN_Level3.blit(miTexto4, (520, 700))
+            SCREEN_Level3.blit(Life_counter, (1000, 700))
+            SCREEN_Level3.blit(Player_life, (1200, 700))
 
             if Health == 0 or Tiempo >= 60:
-                SCREEN.blit(Texto_fin_del_juego, (700, 700))
+                SCREEN_Level3.blit(Texto_fin_del_juego, (700, 700))
 
-            Linea_divisora = pygame.draw.line(SCREEN, BLANCO, (0, 650), (1366, 650), 20)
+            Linea_divisora = pygame.draw.line(SCREEN_Level3, BLANCO, (0, 650), (1366, 650), 20)
 
             # FONDO EN MOVIMIENTO
             x_bucle = x % fondo.get_rect().width
-            SCREEN.blit(fondo, (x_bucle - fondo.get_rect().width, 0))
+            SCREEN_Level3.blit(fondo, (x_bucle - fondo.get_rect().width, 0))
             if x_bucle < Largo_2:
-                SCREEN.blit(fondo, (x_bucle, 0))
+                SCREEN_Level3.blit(fondo, (x_bucle, 0))
             x -= 1
         while Dios:
 
