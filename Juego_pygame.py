@@ -404,8 +404,7 @@ class Enemigo3(pygame.sprite.Sprite):
 # _____________________________________________CREACION DE LA VENTANA_____________________________________________________#
 pygame.init()
 pantalla = pygame.display.set_mode((Largo, Alto))
-class Un_todo:
-    pygame.display.set_caption("¡¡THE PIRATES IN THE SKY!!")
+
 
 
 clock = pygame.time.Clock()

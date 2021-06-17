@@ -28,7 +28,7 @@ menu = pygame_menu.Menu(
     width=500
 )
 
-user_name = menu.add.text_input('Nombre: ', default='', maxchar=10)
+user_name = menu.add.text_input('Nombre: ', default="", maxchar=10)
 menu.add.selector('Nivel: ', [('Primero', 1), ('Segundo', 2),('Tercero', 3)], onchange=set_difficulty)
 menu.add.button('Jugar', start_the_game)
 menu.add.button('Salir', pygame_menu.events.EXIT)
