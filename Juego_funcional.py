@@ -22,7 +22,7 @@ SCREEN_Level3 = pygame.display.set_mode((Largo_2, Alto_2),0,32)
 SCREEN_Gamer_Over = pygame.display.set_mode((Largo_2, Alto_2),0,32)
 
 #FUENTES
-font_titulos = pygame.font.SysFont ("Wide Latin", 30)
+font_titulos = pygame.font.SysFont("Wide Latin", 30)
 font_menu = pygame.font.SysFont("Amasis MT Pro Black",60)
 font_Input = pygame.font.SysFont("Arial",20)
 font_game = pygame.font.SysFont("Bodoni MT Black",40)
@@ -61,8 +61,7 @@ def draw_text(text, font, color, surface,x,y):
 x = 0
 
 #VARIABLES GLOBALES
-Dios = False
-Cronos = True
+
 
 
 
@@ -97,7 +96,7 @@ def Welcome_Window():
         pygame.display.update()
 
 def Menu_juego():
-    global Dios
+
 
     pygame.mixer.music.load('musica/Imposble mejorada.ogg')
     pygame.mixer.music.play(-1)
@@ -115,7 +114,7 @@ def Menu_juego():
         text_place = font_game3.render(user_name, True, (255, 255, 255))
         Cuadrado_texto.w = text_place.get_width() + 20
         #VENTANA
-        SCREEN_Menu.blit(fondo_Menu,(1,1))
+        SCREEN_Menu.blit(fondo_Menu,(0,-70))
         # CUADRO EN EL TITULO
         pygame.draw.rect(SCREEN_Menu, Cafe, (220, 55, 900, 50), 0)
         # SECCION DE NIVELES
@@ -151,9 +150,7 @@ def Menu_juego():
 
         if Button_1.collidepoint((mx,my)):
             if click and user_name != "  ":
-                Dios = True
                 Nivel_Uno()
-
         elif Button_2.collidepoint((mx,my)):
             if click and user_name != "  ":
                 Nivel_Dos()
@@ -163,11 +160,15 @@ def Menu_juego():
         elif Button_4.collidepoint((mx,my)):
             if click:
                 Mejores_puntajes()
+
+
         pygame.draw.rect(SCREEN_Menu,Crema,Button_1)
         pygame.draw.rect(SCREEN_Menu, Crema, Button_2)
         pygame.draw.rect(SCREEN_Menu, Crema, Button_3)
         pygame.draw.rect(SCREEN_Menu, Crema, Button_4)
         pygame.draw.rect(SCREEN_Menu, Cafe,Cuadrado_texto,2)
+
+
         for event in pygame.event.get():
 
             if event.type == pygame.QUIT:
@@ -191,8 +192,8 @@ def Nivel_Uno():
     pygame.mixer.music.load('musica/Remix Four brave champions.ogg')
     pygame.mixer.music.play(0)
     #FLAGS
-    #Dios = True
-    #while Dios:
+    Dios = True
+    click = False
     global user_name
 
 
@@ -296,14 +297,14 @@ def Nivel_Uno():
                     Metalic_sound.play()
 
                 if Right_left_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA DERECHA
-                    self.acceleracion_inicialX = Direccion_aleatoria_X
-                    self.acceleracion_inicialY = Direccion_aleatoria_Y
+                    self.acceleracion_inicialX = random.randint(4,9)
+                    self.acceleracion_inicialY = random.randint(4,9)
 
 
 
                 elif Right_left_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA DERECHA
-                    self.acceleracion_inicialX = Direccion_aleatoria_X
-                    self.acceleracion_inicialY = -Direccion_aleatoria_Y
+                    self.acceleracion_inicialX = random.randint(4,9)
+                    self.acceleracion_inicialY = -random.randint(4,9)
 
 
 
@@ -315,14 +316,14 @@ def Nivel_Uno():
                 if Choque:
                     Metalic_sound.play()
                 if Right_left_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
-                    self.acceleracion_inicialX = -Direccion_aleatoria_X
-                    self.acceleracion_inicialY = Direccion_aleatoria_Y
+                    self.acceleracion_inicialX = -random.randint(4,9)
+                    self.acceleracion_inicialY = random.randint(4,9)
 
 
 
                 elif Right_left_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
-                    self.acceleracion_inicialX = -Direccion_aleatoria_X
-                    self.acceleracion_inicialY = -Direccion_aleatoria_Y
+                    self.acceleracion_inicialX = -random.randint(4,9)
+                    self.acceleracion_inicialY = -random.randint(4,9)
 
 
 
@@ -334,13 +335,13 @@ def Nivel_Uno():
                 if Choque:
                     Metalic_sound.play()
                 if Up_down_direction == 1:
-                    self.acceleracion_inicialX = Direccion_aleatoria_X
-                    self.acceleracion_inicialY = -Direccion_aleatoria_Y
+                    self.acceleracion_inicialX = random.randint(4,9)
+                    self.acceleracion_inicialY = -random.randint(4,9)
 
 
                 elif Up_down_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
-                    self.acceleracion_inicialX = -Direccion_aleatoria_X
-                    self.acceleracion_inicialY = -Direccion_aleatoria_Y
+                    self.acceleracion_inicialX = -random.randint(4,9)
+                    self.acceleracion_inicialY = -random.randint(4,9)
 
 
 
@@ -352,13 +353,13 @@ def Nivel_Uno():
                 if Choque:
                     Metalic_sound.play()
                 if Up_down_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA DERECHA
-                    self.acceleracion_inicialX = Direccion_aleatoria_X
-                    self.acceleracion_inicialY = Direccion_aleatoria_Y
+                    self.acceleracion_inicialX = random.randint(4,9)
+                    self.acceleracion_inicialY = random.randint(4,9)
 
 
                 elif Up_down_direction == 2:  # CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
-                    self.acceleracion_inicialX = -Direccion_aleatoria_X
-                    self.acceleracion_inicialY = Direccion_aleatoria_Y
+                    self.acceleracion_inicialX = -random.randint(4,9)
+                    self.acceleracion_inicialY = random.randint(4,9)
 
     class Enemigo2(pygame.sprite.Sprite):
 
@@ -392,14 +393,14 @@ def Nivel_Uno():
                 if Choque:
                     Metalic_sound.play()
                 if Right_left_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA DERECHA
-                    self.acceleracion_inicialX = Direccion_aleatoria_X
-                    self.acceleracion_inicialY = Direccion_aleatoria_Y
+                    self.acceleracion_inicialX = random.randint(4,9)
+                    self.acceleracion_inicialY = random.randint(4,9)
 
 
 
                 elif Right_left_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA DERECHA
-                    self.acceleracion_inicialX = Direccion_aleatoria_X
-                    self.acceleracion_inicialY = -Direccion_aleatoria_Y
+                    self.acceleracion_inicialX = random.randint(4,9)
+                    self.acceleracion_inicialY = -random.randint(4,9)
 
 
 
@@ -411,14 +412,14 @@ def Nivel_Uno():
                 if Choque:
                     Metalic_sound.play()
                 if Right_left_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
-                    self.acceleracion_inicialX = -Direccion_aleatoria_X
-                    self.acceleracion_inicialY = Direccion_aleatoria_Y
+                    self.acceleracion_inicialX = -random.randint(4,9)
+                    self.acceleracion_inicialY = random.randint(4,9)
 
 
 
                 elif Right_left_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
-                    self.acceleracion_inicialX = -Direccion_aleatoria_X
-                    self.acceleracion_inicialY = -Direccion_aleatoria_Y
+                    self.acceleracion_inicialX = -random.randint(4,9)
+                    self.acceleracion_inicialY = -random.randint(4,9)
 
 
 
@@ -430,12 +431,12 @@ def Nivel_Uno():
                 if Choque:
                     Metalic_sound.play()
                 if Up_down_direction == 1:
-                    self.acceleracion_inicialX = Direccion_aleatoria_X
-                    self.acceleracion_inicialY = -Direccion_aleatoria_Y
+                    self.acceleracion_inicialX = random.randint(4,9)
+                    self.acceleracion_inicialY = -random.randint(4,9)
 
                 elif Up_down_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
-                    self.acceleracion_inicialX = -Direccion_aleatoria_X
-                    self.acceleracion_inicialY = -Direccion_aleatoria_Y
+                    self.acceleracion_inicialX = -random.randint(4,9)
+                    self.acceleracion_inicialY = -random.randint(4,9)
 
 
 
@@ -447,13 +448,13 @@ def Nivel_Uno():
                 if Choque:
                     Metalic_sound.play()
                 if Up_down_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA DERECHA
-                    self.acceleracion_inicialX = Direccion_aleatoria_X
-                    self.acceleracion_inicialY = Direccion_aleatoria_Y
+                    self.acceleracion_inicialX = random.randint(4,9)
+                    self.acceleracion_inicialY = random.randint(4,9)
 
 
                 elif Up_down_direction == 2:  # CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
-                    self.acceleracion_inicialX = -Direccion_aleatoria_X
-                    self.acceleracion_inicialY = Direccion_aleatoria_Y
+                    self.acceleracion_inicialX = -random.randint(4,9)
+                    self.acceleracion_inicialY = random.randint(4,9)
 
     class Enemigo3(pygame.sprite.Sprite):
 
@@ -488,14 +489,14 @@ def Nivel_Uno():
                 if Choque:
                     Metalic_sound.play()
                 if Right_left_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA DERECHA
-                    self.acceleracion_inicialX = Direccion_aleatoria_X
-                    self.acceleracion_inicialY = Direccion_aleatoria_Y
+                    self.acceleracion_inicialX = random.randint(4,9)
+                    self.acceleracion_inicialY = random.randint(4,9)
 
 
 
                 elif Right_left_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA DERECHA
-                    self.acceleracion_inicialX = Direccion_aleatoria_X
-                    self.acceleracion_inicialY = -Direccion_aleatoria_Y
+                    self.acceleracion_inicialX = random.randint(4,9)
+                    self.acceleracion_inicialY = -random.randint(4,9)
 
 
 
@@ -507,14 +508,14 @@ def Nivel_Uno():
                 if Choque:
                     Metalic_sound.play()
                 if Right_left_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
-                    self.acceleracion_inicialX = -Direccion_aleatoria_X
-                    self.acceleracion_inicialY = Direccion_aleatoria_Y
+                    self.acceleracion_inicialX = -random.randint(4,9)
+                    self.acceleracion_inicialY = random.randint(4,9)
 
 
 
                 elif Right_left_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
-                    self.acceleracion_inicialX = -Direccion_aleatoria_X
-                    self.acceleracion_inicialY = -Direccion_aleatoria_Y
+                    self.acceleracion_inicialX = -random.randint(4,9)
+                    self.acceleracion_inicialY = -random.randint(4,9)
 
 
 
@@ -526,13 +527,13 @@ def Nivel_Uno():
                 if Choque:
                     Metalic_sound.play()
                 if Up_down_direction == 1:
-                    self.acceleracion_inicialX = Direccion_aleatoria_X
-                    self.acceleracion_inicialY = -Direccion_aleatoria_Y
+                    self.acceleracion_inicialX = random.randint(4,9)
+                    self.acceleracion_inicialY = -random.randint(4,9)
 
 
                 elif Up_down_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
-                    self.acceleracion_inicialX = -Direccion_aleatoria_X
-                    self.acceleracion_inicialY = -Direccion_aleatoria_Y
+                    self.acceleracion_inicialX = -random.randint(4,9)
+                    self.acceleracion_inicialY = -random.randint(4,9)
 
 
 
@@ -544,13 +545,13 @@ def Nivel_Uno():
                 if Choque:
                     Metalic_sound.play()
                 if Up_down_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA DERECHA
-                    self.acceleracion_inicialX = Direccion_aleatoria_X
-                    self.acceleracion_inicialY = Direccion_aleatoria_Y
+                    self.acceleracion_inicialX = random.randint(4,9)
+                    self.acceleracion_inicialY = random.randint(4,9)
 
 
                 elif Up_down_direction == 2:  # CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
-                    self.acceleracion_inicialX = -Direccion_aleatoria_X
-                    self.acceleracion_inicialY = Direccion_aleatoria_Y
+                    self.acceleracion_inicialX = -random.randint(4,9)
+                    self.acceleracion_inicialY = random.randint(4,9)
 
 
 
@@ -590,18 +591,14 @@ def Nivel_Uno():
 
     RELOJ = pygame.time.Clock()
 
-
-
     #BOTONES
-    Button_Menu = pygame.Rect(100,630,60,20)
+    Button_Menu = pygame.Rect(350,700,60,30)
 
     Health = 3
 
     Tiempo = 0
     Aux_Tiempo = 61
 
-#SCREEN_Level1.blit(Nombre_jugador, (650, 700))
-#Nombre_jugador = font_game2.render(str(user_name), bool(0), BLANCO)
     def actualizacionPantalla():
         global x
 
@@ -615,7 +612,9 @@ def Nivel_Uno():
         SCREEN_Level1.blit(miTexto4, (220, 720))
         SCREEN_Level1.blit(Life_counter, (1000, 700))
         SCREEN_Level1.blit(Player_life, (1200, 700))
-        SCREEN_Level1.blit(Nombre_jugador, (650, 700))
+        SCREEN_Level1.blit(Nombre_jugador, (800, 700))
+        SCREEN_Level1.blit(El_jugador, (550, 700))
+
         if Health <= 0:
             Gamer_over()
         if Tiempo == 6100:
@@ -639,7 +638,7 @@ def Nivel_Uno():
         # ________FPS________________________________________________________________________________________________
         RELOJ.tick(100)
 
-
+        mx, my = pygame.mouse.get_pos()
 
         # TEXTOS EN LA PANTALLA
         miTexto = font_game2.render(str(Tiempo//100), bool(0), BLANCO)
@@ -650,7 +649,7 @@ def Nivel_Uno():
 
         Life_counter = font_game2.render(str("VIDA DEL JUGADOR"), bool(0), BLANCO)
         Player_life = font_game2.render(str(Health), bool(0), BLANCO)
-
+        El_jugador = font_game2.render(str("NOMBRE DEL JUGADOR : "), bool(0), BLANCO)
         Nombre_jugador = font_game2.render(str(user_name), bool(0), BLANCO)
 
         # BUCLE EN EL JUEGO
@@ -658,13 +657,13 @@ def Nivel_Uno():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    click = True
         # ALEATORIOS ARRIBA-ABAJO-DERECHA-IZQUIERDA
         Up_down_direction = random.randint(1, 2)
         Right_left_direction = random.randint(1, 2)
-        # VALORES DE LOS EJES X y Y
-        Direccion_aleatoria_X = random.randint(4, 9)
-        Direccion_aleatoria_Y = random.randint(4, 9)
+
 
         # ___________________________________________ZONA DE VENTANA________________________________________________#
         # ACTUALIZACION DE LA VENTANA
@@ -704,7 +703,9 @@ def Nivel_Uno():
 
         if Aux_Tiempo == 61:
             Tiempo += 1
-
+        if Button_Menu.collidepoint((mx,my)):
+            if click:
+                Menu_juego()
         # MOSTRAR AL JUGADOR Y ENEMIGOS EN LA PANTALLA
         jugador.draw(SCREEN_Level1)
         Enemigo_1.draw(SCREEN_Level1)
@@ -714,10 +715,9 @@ def Nivel_Uno():
 
 
 
-
 def Nivel_Dos():
 
-    Musica = True
+    click = False
     global x
     pygame.mixer.music.load('musica/Remix Four brave champions.ogg')
     pygame.mixer.music.play(0)
@@ -885,6 +885,7 @@ def Nivel_Dos():
                 elif Up_down_direction == 2:  # CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
                     self.acceleracion_inicialX = -Direccion_aleatoria_X
                     self.acceleracion_inicialY = Direccion_aleatoria_Y
+
 
     class Enemigo2(pygame.sprite.Sprite):
 
@@ -1180,7 +1181,7 @@ def Nivel_Dos():
 
     pygame.display.set_caption("¡¡THE PIRATES IN THE SKY!!")
 
-    clock = pygame.time.Clock()
+
 
     # _______________________________________________SPRITES______________________________________________________________
 
@@ -1224,8 +1225,9 @@ def Nivel_Dos():
     Tiempo_Dos = 0
     Aux_Tiempo_Dos = 61
 
-    # SCREEN_Level1.blit(Nombre_jugador, (650, 700))
-    # Nombre_jugador = font_game2.render(str(user_name), bool(0), BLANCO)
+
+    # BOTONES
+    Button_Menu = pygame.Rect(350, 700, 60, 30)
     def actualizacionPantalla():
         global x
 
@@ -1239,7 +1241,9 @@ def Nivel_Dos():
         SCREEN_Level2.blit(miTexto4, (220, 720))
         SCREEN_Level2.blit(Life_counter, (1000, 700))
         SCREEN_Level2.blit(Player_life, (1200, 700))
-        SCREEN_Level2.blit(Nombre_jugador, (650, 700))
+        SCREEN_Level2.blit(Nombre_jugador, (800, 700))
+        SCREEN_Level2.blit(El_jugador, (550, 700))
+
         if Health_Dos <= 0:
             Gamer_over()
         if Tiempo_Dos == 6100:
@@ -1260,6 +1264,7 @@ def Nivel_Dos():
 
         # PUNTAJES
 
+        mx, my = pygame.mouse.get_pos()
 
         # TEXTOS EN LA PANTALLA
         miTexto = Fuente_texto.render(str(Tiempo_Dos//100), bool(0), BLANCO)
@@ -1268,13 +1273,16 @@ def Nivel_Dos():
         miTexto4 = Fuente_texto.render(str(Tiempo_Dos*3//100), bool(0), BLANCO)
         Life_counter = Fuente_texto.render(str("VIDA DEL JUGADOR  :"), bool(0), BLANCO)
         Player_life = Fuente_texto.render(str(Health_Dos), bool(0), BLANCO)
+        El_jugador = font_game2.render(str("NOMBRE DEL JUGADOR : "), bool(0), BLANCO)
         Nombre_jugador = font_game2.render(str(user_name), bool(0), BLANCO)
 
         # BUCLE EN EL JUEGO
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
-
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    click = True
         # ALEATORIOS ARRIBA-ABAJO-DERECHA-IZQUIERDA
         Up_down_direction = random.randint(1, 2)
         Right_left_direction = random.randint(1, 2)
@@ -1323,733 +1331,753 @@ def Nivel_Dos():
 
         if Aux_Tiempo_Dos == 61:
             Tiempo_Dos += 1
+
+        if Button_Menu.collidepoint((mx,my)):
+            if click:
+                Menu_juego()
         # MOSTRAR AL JUGADOR Y ENEMIGOS EN LA PANTALLA
         jugador.draw(SCREEN_Level2)
         Enemigo_1.draw(SCREEN_Level2)
         Enemigo_2.draw(SCREEN_Level2)
         Enemigo_3.draw(SCREEN_Level2)
         Enemigo_4.draw(SCREEN_Level2)
+        pygame.draw.rect(SCREEN_Level1, (255, 255, 255), Button_Menu)
+
 
 
 def Nivel_Tres():
-    running = True
-    Musica = True
+
+
     global x
-    while running:
-
-        class Pirate_ship(pygame.sprite.Sprite):
-            # Sprite del barco
-            def __init__(self):
-                # Se hereda el init de la clase Sprite de pygame
-                super().__init__()
-                # La bala/rectangulo
-                self.image = pygame.image.load("Imagenes_personajes/Barcos estatico.png").convert()
-                self.image.set_colorkey("black")
-
-                # Se obtiene el rectangulo
-                self.rect = self.image.get_rect()
-                # ACOMODAR EL RECTANGULO/CENTRO
-                self.rect.center = (Largo_2 // 2, Alto_2 // 2)
-                # VELOCIDAD INICIAL DE LA NAVE
-                self.acceleracion_inicialX = 0
-                self.acceleracion_inicialY = 0
-                # VIDA DE LA NAVE
+    click = False
+
+    class Pirate_ship(pygame.sprite.Sprite):
+        # Sprite del barco
+        def __init__(self):
+            # Se hereda el init de la clase Sprite de pygame
+            super().__init__()
+            # La bala/rectangulo
+            self.image = pygame.image.load("Imagenes_personajes/Barcos estatico.png").convert()
+            self.image.set_colorkey("black")
+
+            # Se obtiene el rectangulo
+            self.rect = self.image.get_rect()
+            # ACOMODAR EL RECTANGULO/CENTRO
+            self.rect.center = (Largo_2 // 2, Alto_2 // 2)
+            # VELOCIDAD INICIAL DE LA NAVE
+            self.acceleracion_inicialX = 0
+            self.acceleracion_inicialY = 0
+            # VIDA DE LA NAVE
 
-            # ______________________________________MOVIMIENTO NAVE 2___________________________________________#
-            def update(self):  # el UPDATE esta heredado, si se utiliza otra cosa dejará de funcionar
-                # SE ACTUALIZA EL RECTANGULO EN CADA BUCLE
+        # ______________________________________MOVIMIENTO NAVE 2___________________________________________#
+        def update(self):  # el UPDATE esta heredado, si se utiliza otra cosa dejará de funcionar
+            # SE ACTUALIZA EL RECTANGULO EN CADA BUCLE
 
-                # VELOCIDAD PREDETERMINADA CADA VUELTA DEL BUCLE si no se pulsa algo
-                self.acceleracion_inicialX = 0
-                self.acceleracion_inicialY = 0
-                # Mantiene las teclas pulsadas
-                teclas = pygame.key.get_pressed()
+            # VELOCIDAD PREDETERMINADA CADA VUELTA DEL BUCLE si no se pulsa algo
+            self.acceleracion_inicialX = 0
+            self.acceleracion_inicialY = 0
+            # Mantiene las teclas pulsadas
+            teclas = pygame.key.get_pressed()
 
-                # MOVIMIENTO HACIA LA IZQUIERDA
-                if teclas[pygame.K_a]:
-                    self.acceleracion_inicialX = -15
+            # MOVIMIENTO HACIA LA IZQUIERDA
+            if teclas[pygame.K_a]:
+                self.acceleracion_inicialX = -15
 
-                # MOVIMIENTO HACIA LA DERECHA
-                if teclas[pygame.K_d]:
-                    self.acceleracion_inicialX = 15
+            # MOVIMIENTO HACIA LA DERECHA
+            if teclas[pygame.K_d]:
+                self.acceleracion_inicialX = 15
 
-                # MOVIMIENTO HACIA LA ARRIBA
-                if teclas[pygame.K_w]:
-                    self.acceleracion_inicialY = -15
+            # MOVIMIENTO HACIA LA ARRIBA
+            if teclas[pygame.K_w]:
+                self.acceleracion_inicialY = -15
 
-                # MOVIMIENTO HACIA LA ABAJO
-                if teclas[pygame.K_s]:
-                    self.acceleracion_inicialY = 15
+            # MOVIMIENTO HACIA LA ABAJO
+            if teclas[pygame.K_s]:
+                self.acceleracion_inicialY = 15
 
-                # ACTUALIZA LA VELOCIDAD DEL PJ
-                self.rect.x += self.acceleracion_inicialX
-                self.rect.y += self.acceleracion_inicialY
+            # ACTUALIZA LA VELOCIDAD DEL PJ
+            self.rect.x += self.acceleracion_inicialX
+            self.rect.y += self.acceleracion_inicialY
 
-                # LIMITAR EL BORDE  IZQUIERDO
-                if self.rect.left < 0:
-                    self.rect.left = 0
+            # LIMITAR EL BORDE  IZQUIERDO
+            if self.rect.left < 0:
+                self.rect.left = 0
 
-                # LIMITAR EL BORDE DERECHO
-                if self.rect.right > Largo_2:
-                    self.rect.right = Largo_2
+            # LIMITAR EL BORDE DERECHO
+            if self.rect.right > Largo_2:
+                self.rect.right = Largo_2
 
-                # LIMITAR EL BORDE  SUPERIOR
-                if self.rect.top < 0:
-                    self.rect.top = 0
+            # LIMITAR EL BORDE  SUPERIOR
+            if self.rect.top < 0:
+                self.rect.top = 0
 
-                # LIMITAR EL BORDE INFERIOR
-                if self.rect.bottom > 650:
-                    self.rect.bottom = 650
+            # LIMITAR EL BORDE INFERIOR
+            if self.rect.bottom > 650:
+                self.rect.bottom = 650
 
-        # _______________________________________________CLASE ENEMIGO__________________________________________________________#
+    # _______________________________________________CLASE ENEMIGO__________________________________________________________#
 
-        class Enemigo(pygame.sprite.Sprite):
+    class Enemigo(pygame.sprite.Sprite):
 
-            # Sprite del barco
-            def __init__(self):
-                # Se hereda el init de la clase Sprite de pygame
-                super().__init__()
-                # La bala/rectangulo
-                self.image = pygame.image.load("imagenes_adicionales/bomba_class1.png").convert()
-                self.image.set_colorkey("black")
+        # Sprite del barco
+        def __init__(self):
+            # Se hereda el init de la clase Sprite de pygame
+            super().__init__()
+            # La bala/rectangulo
+            self.image = pygame.image.load("imagenes_adicionales/bomba_class1.png").convert()
+            self.image.set_colorkey("black")
 
-                # Se obtiene el rectangulo
-                self.rect = self.image.get_rect()
-                # ACOMODAR EL RECTANGULO/CENTRO
-                self.rect.center = (Largo_2 // 4, Alto_2 // 4)
-                self.rect.x = random.randrange(1, 100)
-                self.rect.y = random.randrange(1, 100)
+            # Se obtiene el rectangulo
+            self.rect = self.image.get_rect()
+            # ACOMODAR EL RECTANGULO/CENTRO
+            self.rect.center = (Largo_2 // 4, Alto_2 // 4)
+            self.rect.x = random.randrange(1, 100)
+            self.rect.y = random.randrange(1, 100)
 
-                self.acceleracion_inicialX = -1
-                self.acceleracion_inicialY = -1
+            self.acceleracion_inicialX = -1
+            self.acceleracion_inicialY = -1
 
-            def update(self):
-                # ACTUALIZA LA VELOCIDAD DEL PJ
-                self.rect.x += self.acceleracion_inicialX
-                self.rect.y += self.acceleracion_inicialY
+        def update(self):
+            # ACTUALIZA LA VELOCIDAD DEL PJ
+            self.rect.x += self.acceleracion_inicialX
+            self.rect.y += self.acceleracion_inicialY
 
-                # LIMITAR EL BORDE  IZQUIERDO
-                if self.rect.left <= 0:
-                    Choque = True
+            # LIMITAR EL BORDE  IZQUIERDO
+            if self.rect.left <= 0:
+                Choque = True
 
-                    if Choque:
-                        Metalic_sound.play()
+                if Choque:
+                    Metalic_sound.play()
 
-                    if Right_left_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA DERECHA
-                        self.acceleracion_inicialX = Direccion_aleatoria_X
-                        self.acceleracion_inicialY = Direccion_aleatoria_Y
+                if Right_left_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA DERECHA
+                    self.acceleracion_inicialX = Direccion_aleatoria_X
+                    self.acceleracion_inicialY = Direccion_aleatoria_Y
 
 
 
-                    elif Right_left_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA DERECHA
-                        self.acceleracion_inicialX = Direccion_aleatoria_X
-                        self.acceleracion_inicialY = -Direccion_aleatoria_Y
+                elif Right_left_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA DERECHA
+                    self.acceleracion_inicialX = Direccion_aleatoria_X
+                    self.acceleracion_inicialY = -Direccion_aleatoria_Y
 
 
 
 
-                # LIMITAR EL BORDE DERECHO
-                elif self.rect.right >= Largo_2:
-                    Choque = True
+            # LIMITAR EL BORDE DERECHO
+            elif self.rect.right >= Largo_2:
+                Choque = True
 
-                    if Choque:
-                        Metalic_sound.play()
-                    if Right_left_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
-                        self.acceleracion_inicialX = -Direccion_aleatoria_X
-                        self.acceleracion_inicialY = Direccion_aleatoria_Y
+                if Choque:
+                    Metalic_sound.play()
+                if Right_left_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
+                    self.acceleracion_inicialX = -Direccion_aleatoria_X
+                    self.acceleracion_inicialY = Direccion_aleatoria_Y
 
 
 
-                    elif Right_left_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
-                        self.acceleracion_inicialX = -Direccion_aleatoria_X
-                        self.acceleracion_inicialY = -Direccion_aleatoria_Y
+                elif Right_left_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
+                    self.acceleracion_inicialX = -Direccion_aleatoria_X
+                    self.acceleracion_inicialY = -Direccion_aleatoria_Y
 
 
 
 
-                # LIMITAR EL BORDE INFERIOR
-                elif self.rect.bottom >= 650:  # CON ESTE LA BALA SUBE HACIA LA DERECHA
-                    Choque = True
+            # LIMITAR EL BORDE INFERIOR
+            elif self.rect.bottom >= 650:  # CON ESTE LA BALA SUBE HACIA LA DERECHA
+                Choque = True
 
-                    if Choque:
-                        Metalic_sound.play()
-                    if Up_down_direction == 1:
-                        self.acceleracion_inicialX = Direccion_aleatoria_X
-                        self.acceleracion_inicialY = -Direccion_aleatoria_Y
+                if Choque:
+                    Metalic_sound.play()
+                if Up_down_direction == 1:
+                    self.acceleracion_inicialX = Direccion_aleatoria_X
+                    self.acceleracion_inicialY = -Direccion_aleatoria_Y
 
 
-                    elif Up_down_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
-                        self.acceleracion_inicialX = -Direccion_aleatoria_X
-                        self.acceleracion_inicialY = -Direccion_aleatoria_Y
+                elif Up_down_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
+                    self.acceleracion_inicialX = -Direccion_aleatoria_X
+                    self.acceleracion_inicialY = -Direccion_aleatoria_Y
 
 
 
 
-                # LIMITAR EL BORDE  SUPERIOR
-                elif self.rect.top <= 0:
-                    Choque = True
+            # LIMITAR EL BORDE  SUPERIOR
+            elif self.rect.top <= 0:
+                Choque = True
 
-                    if Choque:
-                        Metalic_sound.play()
-                    if Up_down_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA DERECHA
-                        self.acceleracion_inicialX = Direccion_aleatoria_X
-                        self.acceleracion_inicialY = Direccion_aleatoria_Y
+                if Choque:
+                    Metalic_sound.play()
+                if Up_down_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA DERECHA
+                    self.acceleracion_inicialX = Direccion_aleatoria_X
+                    self.acceleracion_inicialY = Direccion_aleatoria_Y
 
 
-                    elif Up_down_direction == 2:  # CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
-                        self.acceleracion_inicialX = -Direccion_aleatoria_X
-                        self.acceleracion_inicialY = Direccion_aleatoria_Y
+                elif Up_down_direction == 2:  # CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
+                    self.acceleracion_inicialX = -Direccion_aleatoria_X
+                    self.acceleracion_inicialY = Direccion_aleatoria_Y
 
-        class Enemigo2(pygame.sprite.Sprite):
 
-            # Sprite del barco
-            def __init__(self):
-                # Se hereda el init de la clase Sprite de pygame
-                super().__init__()
-                # La bala/rectangulo
-                self.image = pygame.image.load("imagenes_adicionales/bomba_class2.png").convert()
-                self.image.set_colorkey("black")
+    class Enemigo2(pygame.sprite.Sprite):
 
-                # Se obtiene el rectangulo
-                self.rect = self.image.get_rect()
-                # ACOMODAR EL RECTANGULO/CENTRO
-                self.rect.center = (Largo_2 // 4, Alto_2 // 4)
-                self.rect.x = random.randrange(1, 100)
-                self.rect.y = random.randrange(1, 100)
+        # Sprite del barco
+        def __init__(self):
+            # Se hereda el init de la clase Sprite de pygame
+            super().__init__()
+            # La bala/rectangulo
+            self.image = pygame.image.load("imagenes_adicionales/bomba_class2.png").convert()
+            self.image.set_colorkey("black")
 
-                self.acceleracion_inicialX = -1
-                self.acceleracion_inicialY = -1
+            # Se obtiene el rectangulo
+            self.rect = self.image.get_rect()
+            # ACOMODAR EL RECTANGULO/CENTRO
+            self.rect.center = (Largo_2 // 4, Alto_2 // 4)
+            self.rect.x = random.randrange(1, 100)
+            self.rect.y = random.randrange(1, 100)
 
-            def update(self):
-                # ACTUALIZA LA VELOCIDAD DEL PJ
-                self.rect.x += self.acceleracion_inicialX
-                self.rect.y += self.acceleracion_inicialY
+            self.acceleracion_inicialX = -1
+            self.acceleracion_inicialY = -1
 
-                # LIMITAR EL BORDE  IZQUIERDO
-                if self.rect.left <= 0:
-                    Choque = True
+        def update(self):
+            # ACTUALIZA LA VELOCIDAD DEL PJ
+            self.rect.x += self.acceleracion_inicialX
+            self.rect.y += self.acceleracion_inicialY
 
-                    if Choque:
-                        Metalic_sound.play()
-                    if Right_left_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA DERECHA
-                        self.acceleracion_inicialX = Direccion_aleatoria_X
-                        self.acceleracion_inicialY = Direccion_aleatoria_Y
+            # LIMITAR EL BORDE  IZQUIERDO
+            if self.rect.left <= 0:
+                Choque = True
 
+                if Choque:
+                    Metalic_sound.play()
+                if Right_left_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA DERECHA
+                    self.acceleracion_inicialX = Direccion_aleatoria_X
+                    self.acceleracion_inicialY = Direccion_aleatoria_Y
 
 
-                    elif Right_left_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA DERECHA
-                        self.acceleracion_inicialX = Direccion_aleatoria_X
-                        self.acceleracion_inicialY = -Direccion_aleatoria_Y
 
+                elif Right_left_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA DERECHA
+                    self.acceleracion_inicialX = Direccion_aleatoria_X
+                    self.acceleracion_inicialY = -Direccion_aleatoria_Y
 
 
 
-                # LIMITAR EL BORDE DERECHO
-                elif self.rect.right >= Largo_2:
-                    Choque = True
 
-                    if Choque:
-                        Metalic_sound.play()
-                    if Right_left_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
-                        self.acceleracion_inicialX = -Direccion_aleatoria_X
-                        self.acceleracion_inicialY = Direccion_aleatoria_Y
+            # LIMITAR EL BORDE DERECHO
+            elif self.rect.right >= Largo_2:
+                Choque = True
 
+                if Choque:
+                    Metalic_sound.play()
+                if Right_left_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
+                    self.acceleracion_inicialX = -Direccion_aleatoria_X
+                    self.acceleracion_inicialY = Direccion_aleatoria_Y
 
 
-                    elif Right_left_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
-                        self.acceleracion_inicialX = -Direccion_aleatoria_X
-                        self.acceleracion_inicialY = -Direccion_aleatoria_Y
 
+                elif Right_left_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
+                    self.acceleracion_inicialX = -Direccion_aleatoria_X
+                    self.acceleracion_inicialY = -Direccion_aleatoria_Y
 
 
 
-                # LIMITAR EL BORDE INFERIOR
-                elif self.rect.bottom >= 650:  # CON ESTE LA BALA SUBE HACIA LA DERECHA
-                    Choque = True
 
-                    if Choque:
-                        Metalic_sound.play()
-                    if Up_down_direction == 1:
-                        self.acceleracion_inicialX = Direccion_aleatoria_X
-                        self.acceleracion_inicialY = -Direccion_aleatoria_Y
+            # LIMITAR EL BORDE INFERIOR
+            elif self.rect.bottom >= 650:  # CON ESTE LA BALA SUBE HACIA LA DERECHA
+                Choque = True
 
-                    elif Up_down_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
-                        self.acceleracion_inicialX = -Direccion_aleatoria_X
-                        self.acceleracion_inicialY = -Direccion_aleatoria_Y
+                if Choque:
+                    Metalic_sound.play()
+                if Up_down_direction == 1:
+                    self.acceleracion_inicialX = Direccion_aleatoria_X
+                    self.acceleracion_inicialY = -Direccion_aleatoria_Y
 
+                elif Up_down_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
+                    self.acceleracion_inicialX = -Direccion_aleatoria_X
+                    self.acceleracion_inicialY = -Direccion_aleatoria_Y
 
 
 
-                # LIMITAR EL BORDE  SUPERIOR
-                elif self.rect.top <= 0:
-                    Choque = True
 
-                    if Choque:
-                        Metalic_sound.play()
-                    if Up_down_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA DERECHA
-                        self.acceleracion_inicialX = Direccion_aleatoria_X
-                        self.acceleracion_inicialY = Direccion_aleatoria_Y
+            # LIMITAR EL BORDE  SUPERIOR
+            elif self.rect.top <= 0:
+                Choque = True
 
+                if Choque:
+                    Metalic_sound.play()
+                if Up_down_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA DERECHA
+                    self.acceleracion_inicialX = Direccion_aleatoria_X
+                    self.acceleracion_inicialY = Direccion_aleatoria_Y
 
-                    elif Up_down_direction == 2:  # CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
-                        self.acceleracion_inicialX = -Direccion_aleatoria_X
-                        self.acceleracion_inicialY = Direccion_aleatoria_Y
 
-        class Enemigo3(pygame.sprite.Sprite):
+                elif Up_down_direction == 2:  # CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
+                    self.acceleracion_inicialX = -Direccion_aleatoria_X
+                    self.acceleracion_inicialY = Direccion_aleatoria_Y
 
-            # Sprite del barco
-            def __init__(self):
-                # Se hereda el init de la clase Sprite de pygame
-                super().__init__()
-                # La bala/rectangulo
-                self.image = pygame.image.load("imagenes_adicionales/bomba_class3.png").convert()
-                self.image.set_colorkey("black")
 
-                # Se obtiene el rectangulo
-                self.rect = self.image.get_rect()
-                # ACOMODAR EL RECTANGULO/CENTRO
-                self.rect.center = (Largo_2 // 4, Alto_2 // 4)
-                self.rect.x = random.randrange(1, 100)
-                self.rect.y = random.randrange(1, 100)
+    class Enemigo3(pygame.sprite.Sprite):
 
-                self.acceleracion_inicialX = -1
-                self.acceleracion_inicialY = -1
+        # Sprite del barco
+        def __init__(self):
+            # Se hereda el init de la clase Sprite de pygame
+            super().__init__()
+            # La bala/rectangulo
+            self.image = pygame.image.load("imagenes_adicionales/bomba_class3.png").convert()
+            self.image.set_colorkey("black")
 
-            def update(self):
-                # ACTUALIZA LA VELOCIDAD DEL PJ
-                self.rect.x += self.acceleracion_inicialX
-                self.rect.y += self.acceleracion_inicialY
+            # Se obtiene el rectangulo
+            self.rect = self.image.get_rect()
+            # ACOMODAR EL RECTANGULO/CENTRO
+            self.rect.center = (Largo_2 // 4, Alto_2 // 4)
+            self.rect.x = random.randrange(1, 100)
+            self.rect.y = random.randrange(1, 100)
 
-                # LIMITAR EL BORDE  IZQUIERDO
-                if self.rect.left <= 0:
-                    Choque = True
+            self.acceleracion_inicialX = -1
+            self.acceleracion_inicialY = -1
 
-                    if Choque:
-                        Metalic_sound.play()
-                    if Right_left_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA DERECHA
-                        self.acceleracion_inicialX = Direccion_aleatoria_X
-                        self.acceleracion_inicialY = Direccion_aleatoria_Y
+        def update(self):
+            # ACTUALIZA LA VELOCIDAD DEL PJ
+            self.rect.x += self.acceleracion_inicialX
+            self.rect.y += self.acceleracion_inicialY
 
+            # LIMITAR EL BORDE  IZQUIERDO
+            if self.rect.left <= 0:
+                Choque = True
 
+                if Choque:
+                    Metalic_sound.play()
+                if Right_left_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA DERECHA
+                    self.acceleracion_inicialX = Direccion_aleatoria_X
+                    self.acceleracion_inicialY = Direccion_aleatoria_Y
 
-                    elif Right_left_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA DERECHA
-                        self.acceleracion_inicialX = Direccion_aleatoria_X
-                        self.acceleracion_inicialY = -Direccion_aleatoria_Y
 
 
+                elif Right_left_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA DERECHA
+                    self.acceleracion_inicialX = Direccion_aleatoria_X
+                    self.acceleracion_inicialY = -Direccion_aleatoria_Y
 
 
-                # LIMITAR EL BORDE DERECHO
-                elif self.rect.right >= Largo_2:
-                    Choque = True
 
-                    if Choque:
-                        Metalic_sound.play()
-                    if Right_left_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
-                        self.acceleracion_inicialX = -Direccion_aleatoria_X
-                        self.acceleracion_inicialY = Direccion_aleatoria_Y
 
+            # LIMITAR EL BORDE DERECHO
+            elif self.rect.right >= Largo_2:
+                Choque = True
 
+                if Choque:
+                    Metalic_sound.play()
+                if Right_left_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
+                    self.acceleracion_inicialX = -Direccion_aleatoria_X
+                    self.acceleracion_inicialY = Direccion_aleatoria_Y
 
-                    elif Right_left_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
-                        self.acceleracion_inicialX = -Direccion_aleatoria_X
-                        self.acceleracion_inicialY = -Direccion_aleatoria_Y
 
 
+                elif Right_left_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
+                    self.acceleracion_inicialX = -Direccion_aleatoria_X
+                    self.acceleracion_inicialY = -Direccion_aleatoria_Y
 
 
-                # LIMITAR EL BORDE INFERIOR
-                elif self.rect.bottom >= 650:  # CON ESTE LA BALA SUBE HACIA LA DERECHA
-                    Choque = True
 
-                    if Choque:
-                        Metalic_sound.play()
-                    if Up_down_direction == 1:
-                        self.acceleracion_inicialX = Direccion_aleatoria_X
-                        self.acceleracion_inicialY = -Direccion_aleatoria_Y
 
+            # LIMITAR EL BORDE INFERIOR
+            elif self.rect.bottom >= 650:  # CON ESTE LA BALA SUBE HACIA LA DERECHA
+                Choque = True
 
-                    elif Up_down_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
-                        self.acceleracion_inicialX = -Direccion_aleatoria_X
-                        self.acceleracion_inicialY = -Direccion_aleatoria_Y
+                if Choque:
+                    Metalic_sound.play()
+                if Up_down_direction == 1:
+                    self.acceleracion_inicialX = Direccion_aleatoria_X
+                    self.acceleracion_inicialY = -Direccion_aleatoria_Y
 
 
+                elif Up_down_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
+                    self.acceleracion_inicialX = -Direccion_aleatoria_X
+                    self.acceleracion_inicialY = -Direccion_aleatoria_Y
 
 
-                # LIMITAR EL BORDE  SUPERIOR
-                elif self.rect.top <= 0:
-                    Choque = True
 
-                    if Choque:
-                        Metalic_sound.play()
-                    if Up_down_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA DERECHA
-                        self.acceleracion_inicialX = Direccion_aleatoria_X
-                        self.acceleracion_inicialY = Direccion_aleatoria_Y
 
+            # LIMITAR EL BORDE  SUPERIOR
+            elif self.rect.top <= 0:
+                Choque = True
 
-                    elif Up_down_direction == 2:  # CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
-                        self.acceleracion_inicialX = -Direccion_aleatoria_X
-                        self.acceleracion_inicialY = Direccion_aleatoria_Y
+                if Choque:
+                    Metalic_sound.play()
+                if Up_down_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA DERECHA
+                    self.acceleracion_inicialX = Direccion_aleatoria_X
+                    self.acceleracion_inicialY = Direccion_aleatoria_Y
 
 
-        class Enemigo4(pygame.sprite.Sprite):
+                elif Up_down_direction == 2:  # CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
+                    self.acceleracion_inicialX = -Direccion_aleatoria_X
+                    self.acceleracion_inicialY = Direccion_aleatoria_Y
 
-            # Sprite del barco
-            def __init__(self):
-                # Se hereda el init de la clase Sprite de pygame
-                super().__init__()
-                # La bala/rectangulo
-                self.image = pygame.image.load("imagenes_adicionales/bomba_class4.png").convert()
-                self.image.set_colorkey("black")
 
-                # Se obtiene el rectangulo
-                self.rect = self.image.get_rect()
-                # ACOMODAR EL RECTANGULO/CENTRO
-                self.rect.center = (Largo_2 // 4, Alto_2 // 4)
-                self.rect.x = random.randrange(1, 100)
-                self.rect.y = random.randrange(1, 100)
+    class Enemigo4(pygame.sprite.Sprite):
 
-                self.acceleracion_inicialX = -1
-                self.acceleracion_inicialY = -1
+        # Sprite del barco
+        def __init__(self):
+            # Se hereda el init de la clase Sprite de pygame
+            super().__init__()
+            # La bala/rectangulo
+            self.image = pygame.image.load("imagenes_adicionales/bomba_class4.png").convert()
+            self.image.set_colorkey("black")
 
-            def update(self):
-                # ACTUALIZA LA VELOCIDAD DEL PJ
-                self.rect.x += self.acceleracion_inicialX
-                self.rect.y += self.acceleracion_inicialY
+            # Se obtiene el rectangulo
+            self.rect = self.image.get_rect()
+            # ACOMODAR EL RECTANGULO/CENTRO
+            self.rect.center = (Largo_2 // 4, Alto_2 // 4)
+            self.rect.x = random.randrange(1, 100)
+            self.rect.y = random.randrange(1, 100)
 
-                # LIMITAR EL BORDE  IZQUIERDO
-                if self.rect.left <= 0:
-                    Choque = True
+            self.acceleracion_inicialX = -1
+            self.acceleracion_inicialY = -1
 
-                    if Choque:
-                        Metalic_sound.play()
-                    if Right_left_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA DERECHA
-                        self.acceleracion_inicialX = Direccion_aleatoria_X
-                        self.acceleracion_inicialY = Direccion_aleatoria_Y
+        def update(self):
+            # ACTUALIZA LA VELOCIDAD DEL PJ
+            self.rect.x += self.acceleracion_inicialX
+            self.rect.y += self.acceleracion_inicialY
 
+            # LIMITAR EL BORDE  IZQUIERDO
+            if self.rect.left <= 0:
+                Choque = True
 
+                if Choque:
+                    Metalic_sound.play()
+                if Right_left_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA DERECHA
+                    self.acceleracion_inicialX = Direccion_aleatoria_X
+                    self.acceleracion_inicialY = Direccion_aleatoria_Y
 
-                    elif Right_left_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA DERECHA
-                        self.acceleracion_inicialX = Direccion_aleatoria_X
-                        self.acceleracion_inicialY = -Direccion_aleatoria_Y
 
 
+                elif Right_left_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA DERECHA
+                    self.acceleracion_inicialX = Direccion_aleatoria_X
+                    self.acceleracion_inicialY = -Direccion_aleatoria_Y
 
 
-                # LIMITAR EL BORDE DERECHO
-                elif self.rect.right >= Largo_2:
-                    Choque = True
 
-                    if Choque:
-                        Metalic_sound.play()
-                    if Right_left_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
-                        self.acceleracion_inicialX = -Direccion_aleatoria_X
-                        self.acceleracion_inicialY = Direccion_aleatoria_Y
 
+            # LIMITAR EL BORDE DERECHO
+            elif self.rect.right >= Largo_2:
+                Choque = True
 
+                if Choque:
+                    Metalic_sound.play()
+                if Right_left_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
+                    self.acceleracion_inicialX = -Direccion_aleatoria_X
+                    self.acceleracion_inicialY = Direccion_aleatoria_Y
 
-                    elif Right_left_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
-                        self.acceleracion_inicialX = -Direccion_aleatoria_X
-                        self.acceleracion_inicialY = -Direccion_aleatoria_Y
 
 
+                elif Right_left_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
+                    self.acceleracion_inicialX = -Direccion_aleatoria_X
+                    self.acceleracion_inicialY = -Direccion_aleatoria_Y
 
 
-                # LIMITAR EL BORDE INFERIOR
-                elif self.rect.bottom >= 650:  # CON ESTE LA BALA SUBE HACIA LA DERECHA
-                    Choque = True
 
-                    if Choque:
-                        Metalic_sound.play()
-                    if Up_down_direction == 1:
-                        self.acceleracion_inicialX = Direccion_aleatoria_X
-                        self.acceleracion_inicialY = -Direccion_aleatoria_Y
 
+            # LIMITAR EL BORDE INFERIOR
+            elif self.rect.bottom >= 650:  # CON ESTE LA BALA SUBE HACIA LA DERECHA
+                Choque = True
 
-                    elif Up_down_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
-                        self.acceleracion_inicialX = -Direccion_aleatoria_X
-                        self.acceleracion_inicialY = -Direccion_aleatoria_Y
+                if Choque:
+                    Metalic_sound.play()
+                if Up_down_direction == 1:
+                    self.acceleracion_inicialX = Direccion_aleatoria_X
+                    self.acceleracion_inicialY = -Direccion_aleatoria_Y
 
 
+                elif Up_down_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
+                    self.acceleracion_inicialX = -Direccion_aleatoria_X
+                    self.acceleracion_inicialY = -Direccion_aleatoria_Y
 
 
-                # LIMITAR EL BORDE  SUPERIOR
-                elif self.rect.top <= 0:
-                    Choque = True
 
-                    if Choque:
-                        Metalic_sound.play()
-                    if Up_down_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA DERECHA
-                        self.acceleracion_inicialX = Direccion_aleatoria_X
-                        self.acceleracion_inicialY = Direccion_aleatoria_Y
 
+            # LIMITAR EL BORDE  SUPERIOR
+            elif self.rect.top <= 0:
+                Choque = True
 
-                    elif Up_down_direction == 2:  # CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
-                        self.acceleracion_inicialX = -Direccion_aleatoria_X
-                        self.acceleracion_inicialY = Direccion_aleatoria_Y
-        class Enemigo5(pygame.sprite.Sprite):
+                if Choque:
+                    Metalic_sound.play()
+                if Up_down_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA DERECHA
+                    self.acceleracion_inicialX = Direccion_aleatoria_X
+                    self.acceleracion_inicialY = Direccion_aleatoria_Y
 
-            # Sprite del barco
-            def __init__(self):
-                # Se hereda el init de la clase Sprite de pygame
-                super().__init__()
-                # La bala/rectangulo
-                self.image = pygame.image.load("imagenes_adicionales/bomba_class5.png").convert()
-                self.image.set_colorkey("black")
 
-                # Se obtiene el rectangulo
-                self.rect = self.image.get_rect()
-                # ACOMODAR EL RECTANGULO/CENTRO
-                self.rect.center = (Largo_2 // 4, Alto_2 // 4)
-                self.rect.x = random.randrange(1, 100)
-                self.rect.y = random.randrange(1, 100)
+                elif Up_down_direction == 2:  # CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
+                    self.acceleracion_inicialX = -Direccion_aleatoria_X
+                    self.acceleracion_inicialY = Direccion_aleatoria_Y
 
-                self.acceleracion_inicialX = -1
-                self.acceleracion_inicialY = -1
 
-            def update(self):
-                # ACTUALIZA LA VELOCIDAD DEL PJ
-                self.rect.x += self.acceleracion_inicialX
-                self.rect.y += self.acceleracion_inicialY
+    class Enemigo5(pygame.sprite.Sprite):
 
-                # LIMITAR EL BORDE  IZQUIERDO
-                if self.rect.left <= 0:
-                    Choque = True
+        # Sprite del barco
+        def __init__(self):
+            # Se hereda el init de la clase Sprite de pygame
+            super().__init__()
+            # La bala/rectangulo
+            self.image = pygame.image.load("imagenes_adicionales/bomba_class5.png").convert()
+            self.image.set_colorkey("black")
 
-                    if Choque:
-                        Metalic_sound.play()
-                    if Right_left_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA DERECHA
-                        self.acceleracion_inicialX = Direccion_aleatoria_X
-                        self.acceleracion_inicialY = Direccion_aleatoria_Y
+            # Se obtiene el rectangulo
+            self.rect = self.image.get_rect()
+            # ACOMODAR EL RECTANGULO/CENTRO
+            self.rect.center = (Largo_2 // 4, Alto_2 // 4)
+            self.rect.x = random.randrange(1, 100)
+            self.rect.y = random.randrange(1, 100)
 
+            self.acceleracion_inicialX = -1
+            self.acceleracion_inicialY = -1
 
+        def update(self):
+            # ACTUALIZA LA VELOCIDAD DEL PJ
+            self.rect.x += self.acceleracion_inicialX
+            self.rect.y += self.acceleracion_inicialY
 
-                    elif Right_left_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA DERECHA
-                        self.acceleracion_inicialX = Direccion_aleatoria_X
-                        self.acceleracion_inicialY = -Direccion_aleatoria_Y
+            # LIMITAR EL BORDE  IZQUIERDO
+            if self.rect.left <= 0:
+                Choque = True
 
+                if Choque:
+                    Metalic_sound.play()
+                if Right_left_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA DERECHA
+                    self.acceleracion_inicialX = Direccion_aleatoria_X
+                    self.acceleracion_inicialY = Direccion_aleatoria_Y
 
 
 
-                # LIMITAR EL BORDE DERECHO
-                elif self.rect.right >= Largo_2:
-                    Choque = True
+                elif Right_left_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA DERECHA
+                    self.acceleracion_inicialX = Direccion_aleatoria_X
+                    self.acceleracion_inicialY = -Direccion_aleatoria_Y
 
-                    if Choque:
-                        Metalic_sound.play()
-                    if Right_left_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
-                        self.acceleracion_inicialX = -Direccion_aleatoria_X
-                        self.acceleracion_inicialY = Direccion_aleatoria_Y
 
 
 
-                    elif Right_left_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
-                        self.acceleracion_inicialX = -Direccion_aleatoria_X
-                        self.acceleracion_inicialY = -Direccion_aleatoria_Y
+            # LIMITAR EL BORDE DERECHO
+            elif self.rect.right >= Largo_2:
+                Choque = True
 
+                if Choque:
+                    Metalic_sound.play()
+                if Right_left_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
+                    self.acceleracion_inicialX = -Direccion_aleatoria_X
+                    self.acceleracion_inicialY = Direccion_aleatoria_Y
 
 
 
-                # LIMITAR EL BORDE INFERIOR
-                elif self.rect.bottom >= 650:  # CON ESTE LA BALA SUBE HACIA LA DERECHA
-                    Choque = True
+                elif Right_left_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
+                    self.acceleracion_inicialX = -Direccion_aleatoria_X
+                    self.acceleracion_inicialY = -Direccion_aleatoria_Y
 
-                    if Choque:
-                        Metalic_sound.play()
-                    if Up_down_direction == 1:
-                        self.acceleracion_inicialX = Direccion_aleatoria_X
-                        self.acceleracion_inicialY = -Direccion_aleatoria_Y
 
 
-                    elif Up_down_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
-                        self.acceleracion_inicialX = -Direccion_aleatoria_X
-                        self.acceleracion_inicialY = -Direccion_aleatoria_Y
 
+            # LIMITAR EL BORDE INFERIOR
+            elif self.rect.bottom >= 650:  # CON ESTE LA BALA SUBE HACIA LA DERECHA
+                Choque = True
 
+                if Choque:
+                    Metalic_sound.play()
+                if Up_down_direction == 1:
+                    self.acceleracion_inicialX = Direccion_aleatoria_X
+                    self.acceleracion_inicialY = -Direccion_aleatoria_Y
 
 
-                # LIMITAR EL BORDE  SUPERIOR
-                elif self.rect.top <= 0:
-                    Choque = True
+                elif Up_down_direction == 2:  # CON ESTE LA BALA SUBE HACIA LA IZQUIERDA
+                    self.acceleracion_inicialX = -Direccion_aleatoria_X
+                    self.acceleracion_inicialY = -Direccion_aleatoria_Y
 
-                    if Choque:
-                        Metalic_sound.play()
-                    if Up_down_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA DERECHA
-                        self.acceleracion_inicialX = Direccion_aleatoria_X
-                        self.acceleracion_inicialY = Direccion_aleatoria_Y
 
 
-                    elif Up_down_direction == 2:  # CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
-                        self.acceleracion_inicialX = -Direccion_aleatoria_X
-                        self.acceleracion_inicialY = Direccion_aleatoria_Y
-        # _____________________________________________CREACION DE LA VENTANA_____________________________________________________#
-        pygame.init()
-        pantalla = pygame.display.set_mode((Largo_2, Alto_2))
 
-        pygame.display.set_caption("¡¡THE PIRATES IN THE SKY!!")
+            # LIMITAR EL BORDE  SUPERIOR
+            elif self.rect.top <= 0:
+                Choque = True
 
-        clock = pygame.time.Clock()
+                if Choque:
+                    Metalic_sound.play()
+                if Up_down_direction == 1:  # CON ESTE LA BALA BAJA HACIA LA DERECHA
+                    self.acceleracion_inicialX = Direccion_aleatoria_X
+                    self.acceleracion_inicialY = Direccion_aleatoria_Y
 
-        # _______________________________________________SPRITES______________________________________________________________
 
-        jugador = pygame.sprite.Group()
-        Enemigo_1 = pygame.sprite.Group()
-        Enemigo_2 = pygame.sprite.Group()
-        Enemigo_3 = pygame.sprite.Group()
-        Enemigo_4 = pygame.sprite.Group()
-        Enemigo_5 = pygame.sprite.Group()
-        # SPRITE ENEMIGOS
-        Bullets = Enemigo()
-        Enemigo_1.add(Bullets)
+                elif Up_down_direction == 2:  # CON ESTE LA BALA BAJA HACIA LA IZQUIERDA
+                    self.acceleracion_inicialX = -Direccion_aleatoria_X
+                    self.acceleracion_inicialY = Direccion_aleatoria_Y
+    # _____________________________________________CREACION DE LA VENTANA_____________________________________________________#
+    pygame.init()
+    pantalla = pygame.display.set_mode((Largo_2, Alto_2))
 
-        Bullets2 = Enemigo2()
-        Enemigo_2.add(Bullets2)
+    pygame.display.set_caption("¡¡THE PIRATES IN THE SKY!!")
 
-        Bullets3 = Enemigo3()
-        Enemigo_3.add(Bullets3)
+    clock = pygame.time.Clock()
 
-        Bullets4 = Enemigo4()
-        Enemigo_4.add(Bullets4)
+    # _______________________________________________SPRITES______________________________________________________________
 
-        Bullets5 = Enemigo5()
-        Enemigo_5.add(Bullets5)
+    jugador = pygame.sprite.Group()
+    Enemigo_1 = pygame.sprite.Group()
+    Enemigo_2 = pygame.sprite.Group()
+    Enemigo_3 = pygame.sprite.Group()
+    Enemigo_4 = pygame.sprite.Group()
+    Enemigo_5 = pygame.sprite.Group()
+    # SPRITE ENEMIGOS
+    Bullets = Enemigo()
+    Enemigo_1.add(Bullets)
 
-        # SPRITE JUGADOR
-        Jugador = Pirate_ship()
-        jugador.add(Jugador)
+    Bullets2 = Enemigo2()
+    Enemigo_2.add(Bullets2)
 
-        # VARIABLES PARA EL BUCLE DE LA PANTALLA
-        x = 0
+    Bullets3 = Enemigo3()
+    Enemigo_3.add(Bullets3)
 
-        # CENTRO DE FPS
-        RELOJ = pygame.time.Clock()
+    Bullets4 = Enemigo4()
+    Enemigo_4.add(Bullets4)
 
-        # FUENTES
-        Fuente_texto = pygame.font.Font(None, 19)
+    Bullets5 = Enemigo5()
+    Enemigo_5.add(Bullets5)
 
+    # SPRITE JUGADOR
+    Jugador = Pirate_ship()
+    jugador.add(Jugador)
 
+    # VARIABLES PARA EL BUCLE DE LA PANTALLA
+    x = 0
 
-        # BUCLE PARA LA VENTANA
-        Dios = True
+    # CENTRO DE FPS
+    RELOJ = pygame.time.Clock()
 
-        Tiempo_3 = 0
-        Aux_Tiempo_3 = 60
-        Health = 3
+    # FUENTES
+    Fuente_texto = pygame.font.Font(None, 19)
 
-        # SCREEN_Level1.blit(Nombre_jugador, (650, 700))
-        # Nombre_jugador = font_game2.render(str(user_name), bool(0), BLANCO)
-        def actualizacionPantalla():
-            global x
 
-            # COLOR DE FONDO
-            SCREEN_Level1.fill(MORADO_LINDO)
 
-            # UBICACION DE LOS TEXTOS EN LA PANTALLA
-            SCREEN_Level3.blit(miTexto2, (50, 680))
-            SCREEN_Level3.blit(miTexto, (220, 680))
-            SCREEN_Level3.blit(miTexto3, (50, 720))
-            SCREEN_Level3.blit(miTexto4, (220, 720))
-            SCREEN_Level3.blit(Life_counter, (1000, 700))
-            SCREEN_Level3.blit(Player_life, (1200, 700))
-            SCREEN_Level3.blit(Nombre_jugador, (650, 700))
-            if Health <= 0:
-                Gamer_over()
-            if Tiempo_3 == 6100:
-                Gamer_over()
+    # BUCLE PARA LA VENTANA
+    Dios = True
 
-            Linea_divisora = pygame.draw.line(SCREEN_Level3, BLANCO, (0, 650), (1366, 650), 20)
+    Tiempo_3 = 0
+    Aux_Tiempo_3 = 60
+    Health = 3
 
-            # FONDO EN MOVIMIENTO
-            x_bucle = x % fondo.get_rect().width
-            SCREEN_Level3.blit(fondo, (x_bucle - fondo.get_rect().width, 0))
-            if x_bucle < Largo_2:
-                SCREEN_Level3.blit(fondo, (x_bucle, 0))
-            x -= 1
-        while Dios:
+    # BOTONES
+    Button_Menu = pygame.Rect(350, 700, 60, 30)
+    def actualizacionPantalla():
+        global x
 
-            # ________FPS________________________________________________________________________________________________
-            RELOJ.tick(100)
+        # COLOR DE FONDO
+        SCREEN_Level3.fill(MORADO_LINDO)
 
+        # UBICACION DE LOS TEXTOS EN LA PANTALLA
+        SCREEN_Level3.blit(miTexto2, (50, 680))
+        SCREEN_Level3.blit(miTexto, (220, 680))
+        SCREEN_Level3.blit(miTexto3, (50, 720))
+        SCREEN_Level3.blit(miTexto4, (220, 720))
+        SCREEN_Level3.blit(Life_counter, (1000, 700))
+        SCREEN_Level3.blit(Player_life, (1200, 700))
+        SCREEN_Level3.blit(Nombre_jugador, (800, 700))
+        SCREEN_Level3.blit(El_jugador, (550, 700))
 
-            # TEXTOS EN LA PANTALLA
-            miTexto = Fuente_texto.render(str(Tiempo_3//100), bool(0), BLANCO)
-            miTexto2 = Fuente_texto.render("TEMPORIZADOR   :", bool(0), BLANCO)
-            miTexto3 = Fuente_texto.render("PUNTAJE   :", bool(0), BLANCO)
-            miTexto4 = Fuente_texto.render(str(Tiempo_3*5//100), bool(0), BLANCO)
-            Life_counter = Fuente_texto.render(str("VIDA DEL JUGADOR  :"), bool(0), BLANCO)
-            Player_life = Fuente_texto.render(str(Health), bool(0), BLANCO)
-            Nombre_jugador = font_game2.render(str(user_name), bool(0), BLANCO)
+        if Health <= 0:
+            Gamer_over()
+        if Tiempo_3 == 6100:
+            Gamer_over()
 
-            # BUCLE EN EL JUEGO
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    sys.exit()
+        Linea_divisora = pygame.draw.line(SCREEN_Level3, BLANCO, (0, 650), (1366, 650), 20)
 
-            # ALEATORIOS ARRIBA-ABAJO-DERECHA-IZQUIERDA
-            Up_down_direction = random.randint(1, 2)
-            Right_left_direction = random.randint(1, 2)
-            # VALORES DE LOS EJES X y Y
-            Direccion_aleatoria_X = random.randint(4, 9)
-            Direccion_aleatoria_Y = random.randint(4, 9)
+        # FONDO EN MOVIMIENTO
+        x_bucle = x % fondo.get_rect().width
+        SCREEN_Level3.blit(fondo, (x_bucle - fondo.get_rect().width, 0))
+        if x_bucle < Largo_2:
+            SCREEN_Level3.blit(fondo, (x_bucle, 0))
+        x -= 1
+    while Dios:
 
-            # ___________________________________________ZONA DE VENTANA________________________________________________#
-            # ACTUALIZACION DE LA VENTANA
-            pygame.display.update()
+        # ________FPS________________________________________________________________________________________________
+        RELOJ.tick(100)
 
-            actualizacionPantalla()
+        mx, my = pygame.mouse.get_pos()
 
-            # Actualizar los sprites
-            jugador.update()
+        # TEXTOS EN LA PANTALLA
+        miTexto = Fuente_texto.render(str(Tiempo_3//100), bool(0), BLANCO)
+        miTexto2 = Fuente_texto.render("TEMPORIZADOR   :", bool(0), BLANCO)
+        miTexto3 = Fuente_texto.render("PUNTAJE   :", bool(0), BLANCO)
+        miTexto4 = Fuente_texto.render(str(Tiempo_3*5//100), bool(0), BLANCO)
+        Life_counter = Fuente_texto.render(str("VIDA DEL JUGADOR  :"), bool(0), BLANCO)
+        Player_life = Fuente_texto.render(str(Health), bool(0), BLANCO)
+        El_jugador = font_game2.render(str("NOMBRE DEL JUGADOR : "), bool(0), BLANCO)
+        Nombre_jugador = font_game2.render(str(user_name), bool(0), BLANCO)
 
-            Enemigo_1.update()
+        # BUCLE EN EL JUEGO
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    click = True
+        # ALEATORIOS ARRIBA-ABAJO-DERECHA-IZQUIERDA
+        Up_down_direction = random.randint(1, 2)
+        Right_left_direction = random.randint(1, 2)
+        # VALORES DE LOS EJES X y Y
+        Direccion_aleatoria_X = random.randint(4, 9)
+        Direccion_aleatoria_Y = random.randint(4, 9)
 
-            Enemigo_2.update()
+        # ___________________________________________ZONA DE VENTANA________________________________________________#
+        # ACTUALIZACION DE LA VENTANA
+        pygame.display.update()
 
-            Enemigo_3.update()
+        actualizacionPantalla()
 
-            Enemigo_4.update()
+        # Actualizar los sprites
+        jugador.update()
 
-            Enemigo_5.update()
-            # ______________________COLISIONES______________________________________________________________________________________
+        Enemigo_1.update()
 
-            Colission_1 = pygame.sprite.groupcollide(Enemigo_1, jugador, True, False, pygame.sprite.collide_rect)
+        Enemigo_2.update()
 
-            Colission_2 = pygame.sprite.groupcollide(Enemigo_2, jugador, True, False, pygame.sprite.collide_rect)
+        Enemigo_3.update()
 
-            Colission_3 = pygame.sprite.groupcollide(Enemigo_3, jugador, True, False, pygame.sprite.collide_rect)
+        Enemigo_4.update()
 
-            Colission_4 = pygame.sprite.groupcollide(Enemigo_4, jugador, True, False, pygame.sprite.collide_rect)
+        Enemigo_5.update()
+        # ______________________COLISIONES______________________________________________________________________________________
 
-            Colission_5 = pygame.sprite.groupcollide(Enemigo_5, jugador, True, False, pygame.sprite.collide_rect)
+        Colission_1 = pygame.sprite.groupcollide(Enemigo_1, jugador, True, False, pygame.sprite.collide_rect)
 
-            #Space_ship_collision = pygame.sprite.spritecollide(Jugador, Enemigo_1, True)
+        Colission_2 = pygame.sprite.groupcollide(Enemigo_2, jugador, True, False, pygame.sprite.collide_rect)
 
-            # SI LA BOMBA CHOCA CON LA NAVE SE RESTA LA VIDA
-            if Colission_1:
-                Health -= 1
+        Colission_3 = pygame.sprite.groupcollide(Enemigo_3, jugador, True, False, pygame.sprite.collide_rect)
 
-            if Colission_2:
-                Health -= 1
+        Colission_4 = pygame.sprite.groupcollide(Enemigo_4, jugador, True, False, pygame.sprite.collide_rect)
 
-            if Colission_3:
-                Health -= 1
+        Colission_5 = pygame.sprite.groupcollide(Enemigo_5, jugador, True, False, pygame.sprite.collide_rect)
 
-            if Colission_4:
-                Health -= 1
+        #Space_ship_collision = pygame.sprite.spritecollide(Jugador, Enemigo_1, True)
 
-            if Colission_5:
-                Health -= 1
+        # SI LA BOMBA CHOCA CON LA NAVE SE RESTA LA VIDA
+        if Colission_1:
+            Health -= 1
 
-            if Aux_Tiempo_3 == 60:
-                Tiempo_3 += 1
-            # MOSTRAR AL JUGADOR Y ENEMIGOS EN LA PANTALLA
-            jugador.draw(pantalla)
-            Enemigo_1.draw(pantalla)
-            Enemigo_2.draw(pantalla)
-            Enemigo_3.draw(pantalla)
-            Enemigo_4.draw(pantalla)
-            Enemigo_5.draw(pantalla)
+        if Colission_2:
+            Health -= 1
 
+        if Colission_3:
+            Health -= 1
+
+        if Colission_4:
+            Health -= 1
+
+        if Colission_5:
+            Health -= 1
+
+        if Aux_Tiempo_3 == 60:
+            Tiempo_3 += 1
+
+        if Button_Menu.collidepoint((mx,my)):
+            if click:
+                Menu_juego()
+        # MOSTRAR AL JUGADOR Y ENEMIGOS EN LA PANTALLA
+        jugador.draw(pantalla)
+        Enemigo_1.draw(pantalla)
+        Enemigo_2.draw(pantalla)
+        Enemigo_3.draw(pantalla)
+        Enemigo_4.draw(pantalla)
+        Enemigo_5.draw(pantalla)
+        pygame.draw.rect(SCREEN_Level3, (255, 255, 255), Button_Menu)
 #VENTANA DEL GAMER OVER
 def Gamer_over():
     running = True
@@ -2129,13 +2157,6 @@ def Mejores_puntajes():
 
         pygame.display.update()
         Clock.tick(60)
-
-
-
-
-
-
-
 
 
 
