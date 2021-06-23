@@ -23,6 +23,8 @@ SCREEN_Gamer_Over = pygame.display.set_mode((Largo_2, Alto_2),0,32)
 
 #FUENTES
 font_titulos = pygame.font.SysFont("Wide Latin", 30)
+font_menu3 = pygame.font.SysFont("Amasis MT Pro Black",37)
+font_menu2 = pygame.font.SysFont("Amasis MT Pro Black",45)
 font_menu = pygame.font.SysFont("Amasis MT Pro Black",60)
 font_Input = pygame.font.SysFont("Arial",20)
 font_game = pygame.font.SysFont("Bodoni MT Black",40)
@@ -35,13 +37,19 @@ Metalic_sound = pygame.mixer.Sound('musica/Sonido colision (mp3cut.net).ogg')
 # COLORES
 BLANCO = (255, 255, 255)
 MORADO_LINDO = (39, 22, 56)
+MORADO_LINDO2 = (62,44,118)
+GRIS = (60,60,60)
 Cafe = (122,78,65)
 Crema = (218,181,113)
 Gris = (128,128,128)
+
 #FONDO DEL JUEGO
 fondo = pygame.image.load("Fondo_juego/fondo experimental.png").convert()
+fondo2 = pygame.image.load("Fondo_juego/desert better.jpg").convert()
+fondo3 = pygame.image.load("Fondo_juego/red-sun-between-mountains-minimal.jpg").convert()
 fondo_Menu = pygame.image.load("Fondo_juego/Sky_ship2.jpg").convert()
 fondo_gamerover = pygame.image.load("Fondo_juego/Broken ship.jpg").convert()
+fondo_trofeos = pygame.image.load("Fondo_juego/Trofeos.jpg").convert()
 #FUENTE DE TEXTO Y TAMAÑO DE LETRA
 Fuente_texto = pygame.font.Font(None, 19)
 
@@ -95,6 +103,7 @@ def Welcome_Window():
 
         pygame.display.update()
 
+#VENTANA MENU
 def Menu_juego():
 
 
@@ -131,6 +140,8 @@ def Menu_juego():
         # BOTON 4
         pygame.draw.rect(SCREEN_Menu, Gris, (940, 660, 70, 70), 0)
         Button_4 = pygame.Rect(950, 670, 50, 50)
+        #ABOUT
+        Button_about = pygame.Rect(10, 10, 50, 50)
         #ZONA DE NOMBRE
         pygame.draw.rect(SCREEN_Menu, Cafe, (0, 568, 446, 60), 0)
 
@@ -151,21 +162,33 @@ def Menu_juego():
         if Button_1.collidepoint((mx,my)):
             if click and user_name != "  ":
                 Nivel_Uno()
+            else:
+                click = False
         elif Button_2.collidepoint((mx,my)):
             if click and user_name != "  ":
                 Nivel_Dos()
+            else:
+                click = False
         elif Button_3.collidepoint((mx,my)):
             if click and user_name != "  ":
                 Nivel_Tres()
+            else:
+                click = False
         elif Button_4.collidepoint((mx,my)):
             if click:
                 Mejores_puntajes()
-
-
+            else:
+                click = False
+        elif Button_about.collidepoint((mx,my)):
+            if click:
+                Pantalla_about()
+            else:
+                click = False
         pygame.draw.rect(SCREEN_Menu,Crema,Button_1)
         pygame.draw.rect(SCREEN_Menu, Crema, Button_2)
         pygame.draw.rect(SCREEN_Menu, Crema, Button_3)
         pygame.draw.rect(SCREEN_Menu, Crema, Button_4)
+        pygame.draw.rect(SCREEN_Menu, Crema, Button_about)
         pygame.draw.rect(SCREEN_Menu, Cafe,Cuadrado_texto,2)
 
 
@@ -187,6 +210,7 @@ def Menu_juego():
         pygame.display.flip()
         Clock.tick(60)
 
+#NIVEL1
 def Nivel_Uno():
     #Music
     pygame.mixer.music.load('musica/Remix Four brave champions.ogg')
@@ -228,19 +252,19 @@ def Nivel_Uno():
 
             # MOVIMIENTO HACIA LA IZQUIERDA
             if teclas[pygame.K_a]:
-                self.acceleracion_inicialX = -15
+                self.acceleracion_inicialX = -20
 
             # MOVIMIENTO HACIA LA DERECHA
             if teclas[pygame.K_d]:
-                self.acceleracion_inicialX = 15
+                self.acceleracion_inicialX = 20
 
             # MOVIMIENTO HACIA LA ARRIBA
             if teclas[pygame.K_w]:
-                self.acceleracion_inicialY = -15
+                self.acceleracion_inicialY = -20
 
             # MOVIMIENTO HACIA LA ABAJO
             if teclas[pygame.K_s]:
-                self.acceleracion_inicialY = 15
+                self.acceleracion_inicialY = 20
 
             # ACTUALIZA LA VELOCIDAD DEL PJ
             self.rect.x += self.acceleracion_inicialX
@@ -713,15 +737,14 @@ def Nivel_Uno():
         Enemigo_3.draw(SCREEN_Level1)
         pygame.draw.rect(SCREEN_Level1,(255,255,255),Button_Menu)
 
-
-
+#NIVEL2
 def Nivel_Dos():
 
     click = False
     global x
-    pygame.mixer.music.load('musica/Remix Four brave champions.ogg')
-    pygame.mixer.music.play(0)
-
+    pygame.mixer.music.load('musica/Protectors.ogg')
+    pygame.mixer.music.play(-1)
+    pygame.mixer.music.set_volume(6.0)
 
     class Pirate_ship(pygame.sprite.Sprite):
         # Sprite del barco
@@ -753,19 +776,19 @@ def Nivel_Dos():
 
             # MOVIMIENTO HACIA LA IZQUIERDA
             if teclas[pygame.K_a]:
-                self.acceleracion_inicialX = -15
+                self.acceleracion_inicialX = -20
 
             # MOVIMIENTO HACIA LA DERECHA
             if teclas[pygame.K_d]:
-                self.acceleracion_inicialX = 15
+                self.acceleracion_inicialX = 20
 
             # MOVIMIENTO HACIA LA ARRIBA
             if teclas[pygame.K_w]:
-                self.acceleracion_inicialY = -15
+                self.acceleracion_inicialY = -20
 
             # MOVIMIENTO HACIA LA ABAJO
             if teclas[pygame.K_s]:
-                self.acceleracion_inicialY = 15
+                self.acceleracion_inicialY = 20
 
             # ACTUALIZA LA VELOCIDAD DEL PJ
             self.rect.x += self.acceleracion_inicialX
@@ -1232,7 +1255,7 @@ def Nivel_Dos():
         global x
 
         # COLOR DE FONDO
-        SCREEN_Level1.fill(MORADO_LINDO)
+        SCREEN_Level1.fill(MORADO_LINDO2)
 
         # UBICACION DE LOS TEXTOS EN LA PANTALLA
         SCREEN_Level2.blit(miTexto2, (50, 680))
@@ -1252,10 +1275,10 @@ def Nivel_Dos():
         Linea_divisora = pygame.draw.line(SCREEN_Level2, BLANCO, (0, 650), (1366, 650), 20)
 
         # FONDO EN MOVIMIENTO
-        x_bucle = x % fondo.get_rect().width
-        SCREEN_Level2.blit(fondo, (x_bucle - fondo.get_rect().width, 0))
+        x_bucle = x % fondo2.get_rect().width
+        SCREEN_Level2.blit(fondo2, (x_bucle - fondo2.get_rect().width, 0))
         if x_bucle < Largo_2:
-            SCREEN_Level2.blit(fondo, (x_bucle, 0))
+            SCREEN_Level2.blit(fondo2, (x_bucle, 0))
         x -= 1
     while Dios:
 
@@ -1267,12 +1290,12 @@ def Nivel_Dos():
         mx, my = pygame.mouse.get_pos()
 
         # TEXTOS EN LA PANTALLA
-        miTexto = Fuente_texto.render(str(Tiempo_Dos//100), bool(0), BLANCO)
-        miTexto2 = Fuente_texto.render("TEMPORIZADOR   :", bool(0), BLANCO)
-        miTexto3 = Fuente_texto.render("PUNTAJE   :", bool(0), BLANCO)
-        miTexto4 = Fuente_texto.render(str(Tiempo_Dos*3//100), bool(0), BLANCO)
-        Life_counter = Fuente_texto.render(str("VIDA DEL JUGADOR  :"), bool(0), BLANCO)
-        Player_life = Fuente_texto.render(str(Health_Dos), bool(0), BLANCO)
+        miTexto = font_game2.render(str(Tiempo_Dos//100), bool(0), BLANCO)
+        miTexto2 = font_game2.render("TEMPORIZADOR   :", bool(0), BLANCO)
+        miTexto3 = font_game2.render("PUNTAJE   :", bool(0), BLANCO)
+        miTexto4 = font_game2.render(str(Tiempo_Dos*3//100), bool(0), BLANCO)
+        Life_counter = font_game2.render(str("VIDA DEL JUGADOR  :"), bool(0), BLANCO)
+        Player_life = font_game2.render(str(Health_Dos), bool(0), BLANCO)
         El_jugador = font_game2.render(str("NOMBRE DEL JUGADOR : "), bool(0), BLANCO)
         Nombre_jugador = font_game2.render(str(user_name), bool(0), BLANCO)
 
@@ -1343,13 +1366,13 @@ def Nivel_Dos():
         Enemigo_4.draw(SCREEN_Level2)
         pygame.draw.rect(SCREEN_Level1, (255, 255, 255), Button_Menu)
 
-
-
+#NIVEL3
 def Nivel_Tres():
-
-
     global x
     click = False
+
+    pygame.mixer.music.load('musica/Stregh.ogg')
+    pygame.mixer.music.play(0)
 
     class Pirate_ship(pygame.sprite.Sprite):
         # Sprite del barco
@@ -1357,7 +1380,7 @@ def Nivel_Tres():
             # Se hereda el init de la clase Sprite de pygame
             super().__init__()
             # La bala/rectangulo
-            self.image = pygame.image.load("Imagenes_personajes/Barcos estatico.png").convert()
+            self.image = pygame.image.load("Imagenes_personajes/Pirate ship.png").convert()
             self.image.set_colorkey("black")
 
             # Se obtiene el rectangulo
@@ -1381,19 +1404,19 @@ def Nivel_Tres():
 
             # MOVIMIENTO HACIA LA IZQUIERDA
             if teclas[pygame.K_a]:
-                self.acceleracion_inicialX = -15
+                self.acceleracion_inicialX = -20
 
             # MOVIMIENTO HACIA LA DERECHA
             if teclas[pygame.K_d]:
-                self.acceleracion_inicialX = 15
+                self.acceleracion_inicialX = 20
 
             # MOVIMIENTO HACIA LA ARRIBA
             if teclas[pygame.K_w]:
-                self.acceleracion_inicialY = -15
+                self.acceleracion_inicialY = -20
 
             # MOVIMIENTO HACIA LA ABAJO
             if teclas[pygame.K_s]:
-                self.acceleracion_inicialY = 15
+                self.acceleracion_inicialY = 20
 
             # ACTUALIZA LA VELOCIDAD DEL PJ
             self.rect.x += self.acceleracion_inicialX
@@ -1943,7 +1966,7 @@ def Nivel_Tres():
     RELOJ = pygame.time.Clock()
 
     # FUENTES
-    Fuente_texto = pygame.font.Font(None, 19)
+
 
 
 
@@ -1960,7 +1983,7 @@ def Nivel_Tres():
         global x
 
         # COLOR DE FONDO
-        SCREEN_Level3.fill(MORADO_LINDO)
+        SCREEN_Level3.fill(GRIS)
 
         # UBICACION DE LOS TEXTOS EN LA PANTALLA
         SCREEN_Level3.blit(miTexto2, (50, 680))
@@ -1980,10 +2003,10 @@ def Nivel_Tres():
         Linea_divisora = pygame.draw.line(SCREEN_Level3, BLANCO, (0, 650), (1366, 650), 20)
 
         # FONDO EN MOVIMIENTO
-        x_bucle = x % fondo.get_rect().width
-        SCREEN_Level3.blit(fondo, (x_bucle - fondo.get_rect().width, 0))
+        x_bucle = x % fondo3.get_rect().width
+        SCREEN_Level3.blit(fondo3, (x_bucle - fondo3.get_rect().width, 0))
         if x_bucle < Largo_2:
-            SCREEN_Level3.blit(fondo, (x_bucle, 0))
+            SCREEN_Level3.blit(fondo3, (x_bucle, 0))
         x -= 1
     while Dios:
 
@@ -1993,12 +2016,12 @@ def Nivel_Tres():
         mx, my = pygame.mouse.get_pos()
 
         # TEXTOS EN LA PANTALLA
-        miTexto = Fuente_texto.render(str(Tiempo_3//100), bool(0), BLANCO)
-        miTexto2 = Fuente_texto.render("TEMPORIZADOR   :", bool(0), BLANCO)
-        miTexto3 = Fuente_texto.render("PUNTAJE   :", bool(0), BLANCO)
-        miTexto4 = Fuente_texto.render(str(Tiempo_3*5//100), bool(0), BLANCO)
-        Life_counter = Fuente_texto.render(str("VIDA DEL JUGADOR  :"), bool(0), BLANCO)
-        Player_life = Fuente_texto.render(str(Health), bool(0), BLANCO)
+        miTexto = font_game2.render(str(Tiempo_3//100), bool(0), BLANCO)
+        miTexto2 = font_game2.render("TEMPORIZADOR   :", bool(0), BLANCO)
+        miTexto3 = font_game2.render("PUNTAJE   :", bool(0), BLANCO)
+        miTexto4 = font_game2.render(str(Tiempo_3*5//100), bool(0), BLANCO)
+        Life_counter = font_game2.render(str("VIDA DEL JUGADOR  :"), bool(0), BLANCO)
+        Player_life = font_game2.render(str(Health), bool(0), BLANCO)
         El_jugador = font_game2.render(str("NOMBRE DEL JUGADOR : "), bool(0), BLANCO)
         Nombre_jugador = font_game2.render(str(user_name), bool(0), BLANCO)
 
@@ -2078,6 +2101,7 @@ def Nivel_Tres():
         Enemigo_4.draw(pantalla)
         Enemigo_5.draw(pantalla)
         pygame.draw.rect(SCREEN_Level3, (255, 255, 255), Button_Menu)
+
 #VENTANA DEL GAMER OVER
 def Gamer_over():
     running = True
@@ -2118,25 +2142,41 @@ def Gamer_over():
         pygame.display.update()
         Clock.tick(60)
 
-
+#VENTANA PUNTAJES
 def Mejores_puntajes():
     running = True
 
-    pygame.mixer.music.load('musica/Arcangel two steps from hell.ogg')
+    pygame.mixer.music.load('musica/Puntajes.ogg')
     pygame.mixer.music.play(0)
     while running:
         click_Menu = False
-        SCREEN_Gamer_Over.blit(fondo_gamerover,(1,1))
-        draw_text("¡GAMER OVER!", font_menu, (255, 255, 255), SCREEN_Menu, 520, 300)
-        mx, my = pygame.mouse.get_pos()
+        SCREEN_Gamer_Over.blit(fondo_trofeos,(1,1))
+        #TEXTO EN PANTALLA
+        draw_text("¡MEJORES PUNTAJES!", font_menu, (255, 255, 255), SCREEN_Menu, 480, 50)
+        #PRIMERO
+        draw_text("PRIMERO -->", font_Input, (255, 255, 255), SCREEN_Menu, 480, 150)
+        #SEGUNDO
+        draw_text("SEGUNDO -->", font_Input, (255, 255, 255), SCREEN_Menu, 480, 225)
+        #TERCERO
+        draw_text("TERCERO -->", font_Input, (255, 255, 255), SCREEN_Menu, 480, 300)
+        #CUARTO
+        draw_text("CUARTO -->", font_Input, (255, 255, 255), SCREEN_Menu, 480, 375)
+        #QUINTO
+        draw_text("QUINTO -->", font_Input, (255, 255, 255), SCREEN_Menu, 480, 450)
+        #SEXTO
+        draw_text("SEXTO -->", font_Input, (255, 255, 255), SCREEN_Menu, 480, 525)
+        #SEPTIMO
+        draw_text("SÉPTIMO -->", font_Input, (255, 255, 255), SCREEN_Menu, 480, 600)
+
+
+
+
 
         # BOTON
-        Button_Menu = pygame.Rect(50, 200, 50, 50)
-        #Button_2 = pygame.Rect(50, 400, 50, 50)
-        #Button_3 = pygame.Rect(50, 600, 50, 50)
+        mx, my = pygame.mouse.get_pos()
+        Button_Menu = pygame.Rect(15, 708, 80, 50)
+
         pygame.draw.rect(SCREEN_Gamer_Over, (0, 255, 0), Button_Menu)
-
-
 
 
         for event in pygame.event.get():
@@ -2150,7 +2190,8 @@ def Mejores_puntajes():
             if event.type == MOUSEBUTTONDOWN:
                 if event.button == 1:
                     click_Menu = True
-
+                else:
+                    click_Menu = False
         if Button_Menu.collidepoint((mx, my)):
             if click_Menu:
                 Menu_juego()
@@ -2158,7 +2199,79 @@ def Mejores_puntajes():
         pygame.display.update()
         Clock.tick(60)
 
+def Pantalla_about():
+    running = True
 
+    pygame.mixer.music.load('musica/Puntajes.ogg')
+    pygame.mixer.music.play(0)
+    while running:
+        click_Menu = False
+        SCREEN_Gamer_Over.blit(fondo_trofeos,(1,1))
+        #TEXTO EN PANTALLA
+        draw_text("ABOUT", font_menu2, (255, 255, 255), SCREEN_Menu, 480, 20)
+
+
+        draw_text("Pais de producción :", font_menu2, (255, 255, 255), SCREEN_Menu, 100, 75)
+        draw_text("Costa Rica", font_menu3, (255, 255, 255), SCREEN_Menu, 100, 100)
+
+        #PRIMERO
+        draw_text("Universidad-Carrera  :", font_menu2, (255, 255, 255), SCREEN_Menu, 100, 150)
+        draw_text("Tecnológico de Costa Rica    CE 1102", font_menu3, (255, 255, 255), SCREEN_Menu, 100, 175)
+
+        #SEGUNDO
+        draw_text("Asignatura-Año-Grupo  :", font_menu2, (255, 255, 255), SCREEN_Menu, 100, 225)
+        draw_text("Taller de programación, 2021, GRUPO 4", font_menu3, (255, 255, 255), SCREEN_Menu, 100, 250)
+
+        #TERCERO
+        draw_text("Profesor  :", font_menu2, (255, 255, 255), SCREEN_Menu, 100, 300)
+        draw_text("Luis Barboza Artavia", font_menu3, (255, 255, 255), SCREEN_Menu, 100, 325)
+
+        #CUARTO
+        draw_text("Versión del programa  :", font_menu2, (255, 255, 255), SCREEN_Menu, 100, 375)
+        draw_text("1.0", font_menu3, (255, 255, 255), SCREEN_Menu, 100, 400)
+
+        #QUINTO
+        draw_text("Autores  :", font_menu2, (255, 255, 255), SCREEN_Menu, 100, 450)
+        draw_text("Josthin Soto Sánchez,  Axel Flores Lara", font_menu3, (255, 255, 255), SCREEN_Menu, 100, 475)
+
+        #SEXTO
+        draw_text("Modulos  :", font_menu2, (255, 255, 255), SCREEN_Menu, 100, 525)
+        draw_text("https://www.youtube.com/watch?v=5v_Jl6tMU68&list=PLVzwufPir356RMxSsOccc38jmxfxqfBdp", font_menu3, (255, 255, 255), SCREEN_Menu, 100, 550)
+
+        draw_text("https://www.youtube.com/watch?v=Rvcyf4HsWiw&ab_channel=ClearCode", font_menu3, (255, 255, 255), SCREEN_Menu, 100, 575)
+
+
+
+
+
+
+
+        # BOTON
+        mx, my = pygame.mouse.get_pos()
+        Button_Menu = pygame.Rect(15, 708, 80, 50)
+
+        pygame.draw.rect(SCREEN_Gamer_Over, (0, 255, 0), Button_Menu)
+
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    pygame.quit()
+                    sys.exit()
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    click_Menu = True
+                else:
+                    click_Menu = False
+        if Button_Menu.collidepoint((mx, my)):
+            if click_Menu:
+                Menu_juego()
+
+        pygame.display.update()
+        Clock.tick(60)
 
 Welcome_Window()
 pygame.display.update()
