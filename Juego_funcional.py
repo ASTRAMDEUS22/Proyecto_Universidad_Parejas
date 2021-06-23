@@ -68,12 +68,6 @@ def draw_text(text, font, color, surface,x,y):
 #X XD
 x = 0
 
-#VARIABLES GLOBALES
-
-
-
-
-
 
 
 #VARIABLE PARA ACTIVAR EL BOTON
@@ -120,7 +114,7 @@ def Menu_juego():
 
         # CUADRO DE TEXTO
         Cuadrado_texto = pygame.Rect(185, 589, 320, 40)
-        text_place = font_game3.render(user_name, True, (255, 255, 255))
+        text_place = font_game3.render(user_name, False, (255, 255, 255))
         Cuadrado_texto.w = text_place.get_width() + 20
         #VENTANA
         SCREEN_Menu.blit(fondo_Menu,(0,-70))
@@ -2036,8 +2030,8 @@ def Nivel_Tres():
         Up_down_direction = random.randint(1, 2)
         Right_left_direction = random.randint(1, 2)
         # VALORES DE LOS EJES X y Y
-        Direccion_aleatoria_X = random.randint(4, 9)
-        Direccion_aleatoria_Y = random.randint(4, 9)
+        Direccion_aleatoria_X = random.randint(5, 7)
+        Direccion_aleatoria_Y = random.randint(5, 7)
 
         # ___________________________________________ZONA DE VENTANA________________________________________________#
         # ACTUALIZACION DE LA VENTANA
@@ -2115,10 +2109,10 @@ def Gamer_over():
         mx, my = pygame.mouse.get_pos()
 
         # BOTON
-        Button_Menu = pygame.Rect(50, 200, 50, 50)
+        Button_Menu = pygame.Rect(590, 400, 120, 50)
         #Button_2 = pygame.Rect(50, 400, 50, 50)
         #Button_3 = pygame.Rect(50, 600, 50, 50)
-        pygame.draw.rect(SCREEN_Gamer_Over, (0, 255, 0), Button_Menu)
+        pygame.draw.rect(SCREEN_Gamer_Over, (Crema), Button_Menu)
 
 
 
@@ -2176,7 +2170,7 @@ def Mejores_puntajes():
         mx, my = pygame.mouse.get_pos()
         Button_Menu = pygame.Rect(15, 708, 80, 50)
 
-        pygame.draw.rect(SCREEN_Gamer_Over, (0, 255, 0), Button_Menu)
+        pygame.draw.rect(SCREEN_Gamer_Over, (Crema), Button_Menu)
 
 
         for event in pygame.event.get():
@@ -2207,38 +2201,38 @@ def Pantalla_about():
     while running:
         click_Menu = False
         SCREEN_Gamer_Over.blit(fondo_trofeos,(1,1))
-        #TEXTO EN PANTALLA
+    #TEXTO EN PANTALLA
         draw_text("ABOUT", font_menu2, (255, 255, 255), SCREEN_Menu, 480, 20)
 
 
         draw_text("Pais de producción :", font_menu2, (255, 255, 255), SCREEN_Menu, 100, 75)
-        draw_text("Costa Rica", font_menu3, (255, 255, 255), SCREEN_Menu, 100, 100)
+        draw_text("Costa Rica", font_menu3, (255, 255, 255), SCREEN_Menu, 100, 110)
 
         #PRIMERO
         draw_text("Universidad-Carrera  :", font_menu2, (255, 255, 255), SCREEN_Menu, 100, 150)
-        draw_text("Tecnológico de Costa Rica    CE 1102", font_menu3, (255, 255, 255), SCREEN_Menu, 100, 175)
+        draw_text("Tecnológico de Costa Rica    CE 1102", font_menu3, (255, 255, 255), SCREEN_Menu, 100, 185)
 
         #SEGUNDO
         draw_text("Asignatura-Año-Grupo  :", font_menu2, (255, 255, 255), SCREEN_Menu, 100, 225)
-        draw_text("Taller de programación, 2021, GRUPO 4", font_menu3, (255, 255, 255), SCREEN_Menu, 100, 250)
+        draw_text("Taller de programación, 2021, GRUPO 4", font_menu3, (255, 255, 255), SCREEN_Menu, 100, 260)
 
         #TERCERO
         draw_text("Profesor  :", font_menu2, (255, 255, 255), SCREEN_Menu, 100, 300)
-        draw_text("Luis Barboza Artavia", font_menu3, (255, 255, 255), SCREEN_Menu, 100, 325)
+        draw_text("Luis Barboza Artavia", font_menu3, (255, 255, 255), SCREEN_Menu, 100, 335)
 
         #CUARTO
         draw_text("Versión del programa  :", font_menu2, (255, 255, 255), SCREEN_Menu, 100, 375)
-        draw_text("1.0", font_menu3, (255, 255, 255), SCREEN_Menu, 100, 400)
+        draw_text("1.0", font_menu3, (255, 255, 255), SCREEN_Menu, 100, 410)
 
         #QUINTO
         draw_text("Autores  :", font_menu2, (255, 255, 255), SCREEN_Menu, 100, 450)
-        draw_text("Josthin Soto Sánchez,  Axel Flores Lara", font_menu3, (255, 255, 255), SCREEN_Menu, 100, 475)
+        draw_text("Josthin Soto Sánchez,  Axel Flores Lara", font_menu3, (255, 255, 255), SCREEN_Menu, 100, 485)
 
         #SEXTO
         draw_text("Modulos  :", font_menu2, (255, 255, 255), SCREEN_Menu, 100, 525)
-        draw_text("https://www.youtube.com/watch?v=5v_Jl6tMU68&list=PLVzwufPir356RMxSsOccc38jmxfxqfBdp", font_menu3, (255, 255, 255), SCREEN_Menu, 100, 550)
+        draw_text("https://www.youtube.com/watch?v=5v_Jl6tMU68&list=PLVzwufPir356RMxSsOccc38jmxfxqfBdp", font_menu3, (255, 255, 255), SCREEN_Menu, 100, 560)
 
-        draw_text("https://www.youtube.com/watch?v=Rvcyf4HsWiw&ab_channel=ClearCode", font_menu3, (255, 255, 255), SCREEN_Menu, 100, 575)
+        draw_text("https://www.youtube.com/watch?v=Rvcyf4HsWiw&ab_channel=ClearCode", font_menu3, (255, 255, 255), SCREEN_Menu, 100, 585)
 
 
 
@@ -2250,7 +2244,7 @@ def Pantalla_about():
         mx, my = pygame.mouse.get_pos()
         Button_Menu = pygame.Rect(15, 708, 80, 50)
 
-        pygame.draw.rect(SCREEN_Gamer_Over, (0, 255, 0), Button_Menu)
+        pygame.draw.rect(SCREEN_Gamer_Over, (Crema), Button_Menu)
 
 
         for event in pygame.event.get():
